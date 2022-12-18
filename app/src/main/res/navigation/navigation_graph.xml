@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/home_fragment">
+
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.komal.sugarcoated.home.ui.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/actionHomeToAddNewRecord"
+            app:destination="@+id/addNewRecordFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/files_fragment"
+        android:name="com.komal.sugarcoated.files.ui.fragment.FilesFragment"
+        android:label="fragment_files"
+        tools:layout="@layout/fragment_files" />
+
+    <fragment
+        android:id="@+id/calendar_fragment"
+        android:name="com.komal.sugarcoated.calendar.ui.fragment.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+
+    <fragment
+        android:id="@+id/log_book_fragment"
+        android:name="com.komal.sugarcoated.logBook.ui.fragment.LogBookFragment"
+        android:label="fragment_log_book"
+        tools:layout="@layout/fragment_log_book" />
+
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="com.komal.sugarcoated.settings.ui.fragment.SettingsFragment"
+        android:label="fragment_settings" />
+
+    <fragment
+        android:id="@+id/addNewRecordFragment"
+        android:name="com.komal.sugarcoated.addNewRecord.ui.fragment.AddNewRecordFragment"
+        android:label="fragment_add_new_record"
+        tools:layout="@layout/fragment_add_new_record" />
+
+</navigation>
