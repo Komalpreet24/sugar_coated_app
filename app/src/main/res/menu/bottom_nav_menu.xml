@@ -5,25 +5,25 @@
         android:id="@+id/files_fragment"
         app:showAsAction="always"
         android:icon="@drawable/ic_files"
-        android:title="Files" />
+        android:title="@string/files" />
     <item
         android:id="@+id/log_book_fragment"
         app:showAsAction="always"
         android:icon="@drawable/ic_log_book"
-        android:title="Log Book" />
+        android:title="@string/log_book" />
     <item
         android:id="@+id/home_fragment"
         app:showAsAction="always"
         android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:title="@string/home" />
     <item
         android:id="@+id/calendar_fragment"
         app:showAsAction="always"
         android:icon="@drawable/ic_calendar"
-        android:title="Supplies" />
+        android:title="@string/supplies" />
     <item
         android:id="@+id/settings_fragment"
         app:showAsAction="always"
         android:icon="@drawable/ic_settings"
-        android:title="Settings" />
+        android:title="@string/settings" />
 </menu>

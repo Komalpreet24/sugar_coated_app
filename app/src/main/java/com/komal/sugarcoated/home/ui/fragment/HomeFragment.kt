@@ -15,6 +15,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.komal.sugarcoated.databinding.FragmentHomeBinding
 import com.komal.sugarcoated.home.ui.vm.HomeViewModel
+import com.komal.sugarcoated.utils.Constants.FIVE_MINUTES
+import com.komal.sugarcoated.utils.Constants.ONE_SECOND
 
 
 class HomeFragment : Fragment() {
@@ -51,17 +53,9 @@ class HomeFragment : Fragment() {
             Handler(Looper.getMainLooper()).postDelayed({
                 webView.loadUrl(url)
                 binding.swipeContainer.isRefreshing = false
-            }, 1000)
+            }, ONE_SECOND)
         }
 
-    }
-
-    private fun reloadWebView() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            reloadWebView()
-            isWebViewReloading = true
-            webView.loadUrl(url)
-        }, 300000)
     }
 
     private fun setupWebView(){
@@ -80,7 +74,7 @@ class HomeFragment : Fragment() {
                 request: WebResourceRequest?
             ): Boolean {
                 webView.loadUrl(url)
-                return true;
+                return true
             }
 
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
@@ -96,6 +90,14 @@ class HomeFragment : Fragment() {
             }
 
         }
+    }
+
+    private fun reloadWebView() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            reloadWebView()
+            isWebViewReloading = true
+            webView.loadUrl(url)
+        }, FIVE_MINUTES)
     }
 
     fun makeWebViewInvisible() {

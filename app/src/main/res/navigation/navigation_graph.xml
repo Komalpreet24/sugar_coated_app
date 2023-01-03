@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/home_fragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/home_fragment"
@@ -39,9 +39,36 @@
         android:label="fragment_settings" />
 
     <fragment
-        android:id="@+id/addNewRecordFragment"
+        android:id="@+id/add_new_record_fragment"
         android:name="com.komal.sugarcoated.addNewRecord.ui.fragment.AddNewRecordFragment"
         android:label="fragment_add_new_record"
         tools:layout="@layout/fragment_add_new_record" />
+
+    <fragment
+        android:id="@+id/signup_fragment"
+        android:name="com.komal.sugarcoated.signup.ui.fragment.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" />
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.komal.sugarcoated.signup.ui.fragment.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_home_fragment"
+            app:destination="@id/home_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.komal.sugarcoated.splash.ui.fragment.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_login_fragment"
+            app:destination="@id/login_fragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_home_fragment"
+            app:destination="@id/home_fragment" />
+    </fragment>
 
 </navigation>
