@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toTopOf="@id/swipe_container"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/theme"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_container"
