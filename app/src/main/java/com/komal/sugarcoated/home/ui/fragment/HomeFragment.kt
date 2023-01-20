@@ -10,13 +10,16 @@ import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import com.komal.sugarcoated.R
 import com.komal.sugarcoated.databinding.FragmentHomeBinding
 import com.komal.sugarcoated.home.ui.vm.HomeViewModel
 import com.komal.sugarcoated.utils.Constants.FIVE_MINUTES
 import com.komal.sugarcoated.utils.Constants.ONE_SECOND
+import com.komal.sugarcoated.utils.findLocationOfCenterOnTheScreen
 
 
 class HomeFragment : Fragment() {
@@ -41,7 +44,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.addNewRecord.setOnClickListener{
-            Navigation.findNavController(it).navigate(HomeFragmentDirections.actionHomeToAddNewRecord())
+
+            val positions = it.findLocationOfCenterOnTheScreen()
+            val bundle = bundleOf("positions" to positions)
+            findNavController()
+                .navigate(R.id.action_home_fragment_to_add_new_record_fragment, bundle)
+
         }
 
         setupWebView()

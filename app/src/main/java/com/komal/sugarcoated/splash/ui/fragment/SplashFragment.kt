@@ -43,7 +43,8 @@ class SplashFragment : Fragment() {
     // to send a message with a delayed time.
     Handler().postDelayed({
       view?.let { Navigation.findNavController(it)
-        .navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment()) }
+        .navigate(SplashFragmentDirections.actionSplashFragmentToLoginFragment())
+      }
     }, 3000) // 3000 is the delayed time in milliseconds.
 
     return binding.root

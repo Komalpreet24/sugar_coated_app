@@ -3,59 +3,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/splashFragment"
+    app:enterAnim="@anim/slide_right"
+    app:exitAnim="@anim/slide_up"
+    app:popEnterAnim="@anim/slide_right"
+    app:popExitAnim="@anim/slide_up">
 
     <fragment
         android:id="@+id/home_fragment"
         android:name="com.komal.sugarcoated.home.ui.fragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/actionHomeToAddNewRecord"
-            app:destination="@+id/addNewRecordFragment" />
+            android:id="@+id/action_home_fragment_to_add_new_record_fragment"
+            app:destination="@id/add_new_record_fragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/files_fragment"
         android:name="com.komal.sugarcoated.files.ui.fragment.FilesFragment"
         android:label="fragment_files"
-        tools:layout="@layout/fragment_files" />
+        tools:layout="@layout/fragment_files"
+        app:popUpTo="@id/home_fragment" />
 
     <fragment
         android:id="@+id/calendar_fragment"
         android:name="com.komal.sugarcoated.calendar.ui.fragment.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar"/>
 
     <fragment
         android:id="@+id/log_book_fragment"
         android:name="com.komal.sugarcoated.logBook.ui.fragment.LogBookFragment"
         android:label="fragment_log_book"
-        tools:layout="@layout/fragment_log_book" />
+        tools:layout="@layout/fragment_log_book"/>
 
     <fragment
         android:id="@+id/settings_fragment"
         android:name="com.komal.sugarcoated.settings.ui.fragment.SettingsFragment"
-        android:label="fragment_settings" />
+        android:label="fragment_settings"/>
 
     <fragment
         android:id="@+id/add_new_record_fragment"
         android:name="com.komal.sugarcoated.addNewRecord.ui.fragment.AddNewRecordFragment"
         android:label="fragment_add_new_record"
-        tools:layout="@layout/fragment_add_new_record" />
+        tools:layout="@layout/fragment_add_new_record">
+        <action
+            android:id="@+id/action_add_new_record_fragment_to_home_fragment"
+            app:destination="@id/home_fragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/signup_fragment"
         android:name="com.komal.sugarcoated.signup.ui.fragment.SignupFragment"
         android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" />
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signup_fragment_to_login_fragment"
+            app:destination="@id/login_fragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_right"
+            app:popEnterAnim="@anim/slide_left"
+            app:popExitAnim="@anim/slide_right"/>
+    </fragment>
+
     <fragment
         android:id="@+id/login_fragment"
         android:name="com.komal.sugarcoated.signup.ui.fragment.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_home_fragment"
-            app:destination="@id/home_fragment" />
+            app:destination="@id/home_fragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_right"
+            app:popEnterAnim="@anim/slide_left"
+            app:popExitAnim="@anim/slide_right"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -65,10 +89,25 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_login_fragment"
-            app:destination="@id/login_fragment" />
+            app:destination="@id/login_fragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_right"
+            app:popEnterAnim="@anim/slide_left"
+            app:popExitAnim="@anim/slide_right"/>
         <action
             android:id="@+id/action_splashFragment_to_home_fragment"
-            app:destination="@id/home_fragment" />
+            app:destination="@id/home_fragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_right"
+            app:popEnterAnim="@anim/slide_left"
+            app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_splashFragment_to_signup_fragment"
+            app:destination="@id/signup_fragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_right"
+            app:popEnterAnim="@anim/slide_left"
+            app:popExitAnim="@anim/slide_right"/>
     </fragment>
 
 </navigation>
