@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
@@ -20,7 +21,6 @@ import com.komal.sugarcoated.utils.exitCircularReveal
 class HomeActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityHomeBinding
-//  private var doubleBackToExitPressedOnce = false
   private var isHomeScreen = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
       navHostFragment.navController
     )
 
-    navHostFragment.navController.addOnDestinationChangedListener { controller, destination, arguments ->
+    navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
       when (destination.id) {
         R.id.files_fragment,
         R.id.calendar_fragment,

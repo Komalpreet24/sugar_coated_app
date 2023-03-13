@@ -18,7 +18,6 @@ fun View.startCircularReveal(fromLeft: Boolean) {
     override fun onLayoutChange(v: View, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int,
                                 oldTop: Int, oldRight: Int, oldBottom: Int) {
       v.removeOnLayoutChangeListener(this)
-      // TODO: Inject this from arguments
       val cx = if (fromLeft) v.left else v.right
       val cy = v.bottom
       val radius = Math.hypot(right.toDouble(), bottom.toDouble()).toInt()

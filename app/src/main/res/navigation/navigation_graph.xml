@@ -69,7 +69,7 @@
 
     <fragment
         android:id="@+id/login_fragment"
-        android:name="com.komal.sugarcoated.signup.ui.fragment.LoginFragment"
+        android:name="com.komal.sugarcoated.login.ui.fragment.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_home_fragment"

@@ -7,4 +7,5 @@
     <color name="PinkDark">#FFCC9090</color>
     <color name="GreenMain">#5A6454</color>
     <color name="GreenDark">#FF5A6454</color>
+    <color name="Transparent">#00FFFFFF</color>
 </resources>

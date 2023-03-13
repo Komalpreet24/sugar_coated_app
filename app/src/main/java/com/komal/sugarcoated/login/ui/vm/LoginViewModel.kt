@@ -55,9 +55,9 @@ class LoginViewModel(app: Application): AndroidViewModel(app) {
     }
   }
 
-//  fun resetLoginLiveData(){
-//    _loginStatus.value =  ResultOf.Success(RESET)
-//  }
+  fun resetLoginLiveData(){
+    _loginStatus.value =  ResultOf.Success(RESET)
+  }
 //
 //  fun logout(){
 //    _logoutStatus.value = ResultOf.Loading
