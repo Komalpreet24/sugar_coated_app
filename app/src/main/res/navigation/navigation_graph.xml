@@ -57,14 +57,16 @@
         android:id="@+id/signup_fragment"
         android:name="com.komal.sugarcoated.signup.ui.fragment.SignupFragment"
         android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" >
+        tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signup_fragment_to_login_fragment"
             app:destination="@id/login_fragment"
-            app:enterAnim="@anim/slide_left"
-            app:exitAnim="@anim/slide_right"
-            app:popEnterAnim="@anim/slide_left"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popUpTo="@id/login_fragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_right"
+            app:exitAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/slide_right"
+            app:popExitAnim="@anim/slide_left"/>
     </fragment>
 
     <fragment
@@ -80,6 +82,13 @@
             app:popExitAnim="@anim/slide_right"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_login_fragment_to_signup_fragment"
+            app:destination="@id/signup_fragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_right"
+            app:popEnterAnim="@anim/slide_left"
+            app:popExitAnim="@anim/slide_right"/>
     </fragment>
 
     <fragment
@@ -97,13 +106,6 @@
         <action
             android:id="@+id/action_splashFragment_to_home_fragment"
             app:destination="@id/home_fragment"
-            app:enterAnim="@anim/slide_left"
-            app:exitAnim="@anim/slide_right"
-            app:popEnterAnim="@anim/slide_left"
-            app:popExitAnim="@anim/slide_right"/>
-        <action
-            android:id="@+id/action_splashFragment_to_signup_fragment"
-            app:destination="@id/signup_fragment"
             app:enterAnim="@anim/slide_left"
             app:exitAnim="@anim/slide_right"
             app:popEnterAnim="@anim/slide_left"

@@ -1,39 +1,95 @@
 package com.komal.sugarcoated.signup.ui.fragment
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.text.TextUtils
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
-import com.komal.sugarcoated.databinding.FragmentHomeBinding
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.komal.sugarcoated.R
 import com.komal.sugarcoated.databinding.FragmentSignupBinding
-import com.komal.sugarcoated.home.ui.fragment.HomeFragmentDirections
+import com.komal.sugarcoated.network.NetworkResult
 import com.komal.sugarcoated.signup.ui.vm.SignupViewModel
-import com.komal.sugarcoated.utils.Constants
+import com.komal.sugarcoated.utils.*
 
-class SignupFragment : Fragment() {
+class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding::inflate) {
 
-  private lateinit var binding: FragmentSignupBinding
-  private val signUpViewModel by viewModels<SignupViewModel>()
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-
-    binding = FragmentSignupBinding.inflate(layoutInflater)
-    return binding.root
-
-  }
+  private val signupViewModel by viewModels<SignupViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+    binding.btnSignup.setOnClickListener {
 
+      if(validate()){
+        signup(binding.etEmail.text.toString(),binding.etSetPassword.text.toString())
+      }
+    }
+
+    binding.tvLogin.setOnClickListener{
+      navigateUpToLoginFragment()
+    }
+  }
+
+  private fun navigateUpToLoginFragment() {
+    findNavController().navigateUp()
+  }
+
+  private fun validate(): Boolean {
+    if(!isEmailValid(binding.etEmail.text.toString())){
+      binding.etEmail.error = getString(R.string.email_validation)
+      return false
+    }
+    if(!isPasswordValid(binding.etSetPassword.text.toString())){
+      binding.etSetPassword.error = getString(R.string.password_validation)
+      return false
+    }
+    if(!binding.etSetPassword.text.toString().equals(binding.etConfirmPassword.text.toString())){
+      binding.etConfirmPassword.error = getString(R.string.password_does_not_match)
+      return false
+    }
+
+    return true
+  }
+
+  private fun signup(email: String, password: String) {
+    signupViewModel.signUp(email, password)
+    observeSignup()
+  }
+
+  private fun observeSignup() {
+
+    signupViewModel.signUpStatus.observe(viewLifecycleOwner, Observer { result->
+      result?.let {
+        when(it){
+          is NetworkResult.ResultOf.Success ->{
+            hideProgress()
+            if(it.value.equals(Constants.SIGNUP_SUCCESS,ignoreCase = true)){
+              showToast(requireContext(), getString(R.string.signup_successful))
+              signupViewModel.resetSignUpLiveData()
+              navigateUpToLoginFragment()
+            } else{
+              showToast(
+                requireContext(),
+                String.format(getString(R.string.signup_failed), it.value)
+              )
+            }
+          }
+          is NetworkResult.ResultOf.Failure -> {
+            hideProgress()
+            val failedMessage =  it.message ?: getString(R.string.unknown_error)
+            showToast(
+              requireContext(),
+              String.format(getString(R.string.signup_failed), failedMessage)
+            )
+          }
+          is NetworkResult.ResultOf.Loading -> {
+            showProgress(requireContext())
+          }
+        }
+      }
+    })
 
   }
+
 }

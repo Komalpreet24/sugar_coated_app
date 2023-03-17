@@ -43,14 +43,14 @@ class LoginViewModel(app: Application): AndroidViewModel(app) {
                 Log.d(LOGIN, "Login Failed with ${task.exception}")
                 _loginStatus.postValue(
                   ResultOf.Failure(
-                    "Login Failed: ${task.exception}", task.exception))
+                    "${task.exception}", task.exception))
               }
             }
         }
 
       }catch (e:Exception){
         e.printStackTrace()
-        _loginStatus.postValue(ResultOf.Failure("Failed with Exception ${e.message} ", e))
+        _loginStatus.postValue(ResultOf.Failure("${e.message} ", e))
       }
     }
   }

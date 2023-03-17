@@ -21,4 +21,30 @@
     <string name="home">Home</string>
     <string name="supplies">Supplies</string>
     <string name="settings">Settings</string>
+
+    <!--Error Strings-->
+    <string name="email_validation">Invalid email</string>
+    <string name="password_validation">Password must be at least 6 characters</string>
+    <string name="password_does_not_match">Password does not match</string>
+    <string name="login_failed">Login failed with %1$s</string>
+    <string name="signup_failed">Sign up failed with %1$s</string>
+    <string name="unknown_error">Unknown Error</string>
+
+    <!--Success Strings-->
+    <string name="login_successful">Login Successful</string>
+    <string name="signup_successful">Registration Successful, Please login.</string>
+
+    <!--UI Strings-->
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="sign_up_instead">Don\'t have an account? <u><font color='#FFE79D9D'>Sign up</font></u> here.</string>
+    <string name="login_instead"><u><font color='#FFE79D9D'>Login</font></u> instead?</string>
+    <string name="let_s_get_started">Let\'s get started!</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="set_password">Set password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="forgot_password">Forgot password?</string>
+
 </resources>
