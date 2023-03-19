@@ -32,4 +32,8 @@
 
     </PreferenceCategory>
 
+    <Preference
+        app:key="logout"
+        app:layout="@layout/button_logout" />
+
 </PreferenceScreen>

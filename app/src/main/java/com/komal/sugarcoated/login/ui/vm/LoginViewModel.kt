@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.komal.sugarcoated.network.NetworkResult.ResultOf
 import com.komal.sugarcoated.utils.Constants.LOGIN
 import com.komal.sugarcoated.utils.Constants.LOGIN_SUCCESS
+import com.komal.sugarcoated.utils.Constants.LOGOUT_SUCCESS
 import com.komal.sugarcoated.utils.Constants.RESET
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -58,22 +59,21 @@ class LoginViewModel(app: Application): AndroidViewModel(app) {
   fun resetLoginLiveData(){
     _loginStatus.value =  ResultOf.Success(RESET)
   }
-//
-//  fun logout(){
-//    _logoutStatus.value = ResultOf.Loading
-//    viewModelScope.launch(Dispatchers.IO){
-//      var  errorCode = -1
-//      try{
-//        _auth?.let {authentation ->
-//          authentation.signOut()
-//          _logoutStatus.postValue(ResultOf.Success("Signout Successful"))
-//        }
-//
-//      }catch (e:Exception){
-//        e.printStackTrace()
-//        _logoutStatus.postValue(ResultOf.Failure("Failed with Exception ${e.message} ", e))
-//      }
-//    }
-//  }
+
+  fun logout(){
+    _logoutStatus.value = ResultOf.Loading
+    viewModelScope.launch(Dispatchers.IO){
+      try{
+        _auth?.let { authentication ->
+          authentication.signOut()
+          _logoutStatus.postValue(ResultOf.Success(LOGOUT_SUCCESS))
+        }
+
+      }catch (e:Exception){
+        e.printStackTrace()
+        _logoutStatus.postValue(ResultOf.Failure("${e.message}", e))
+      }
+    }
+  }
 
 }

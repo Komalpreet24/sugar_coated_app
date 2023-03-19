@@ -11,10 +11,7 @@ import com.komal.sugarcoated.databinding.FragmentLoginBinding
 import com.komal.sugarcoated.login.ui.vm.LoginViewModel
 import com.komal.sugarcoated.network.NetworkResult
 import com.komal.sugarcoated.utils.*
-
-//import com.komal.sugarcoated.utils.hideProgress
-//import com.komal.sugarcoated.utils.showProgress
-
+import com.komal.sugarcoated.utils.Constants.RESET
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
@@ -65,7 +62,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
               showToast(requireContext(), getString(R.string.login_successful))
               loginViewModel.resetLoginLiveData()
               navigateToHomeFragment()
-            }else if(it.value.equals("Reset",ignoreCase = true)){
+            }else if(it.value.equals(RESET,ignoreCase = true)){
 
             }
             else{

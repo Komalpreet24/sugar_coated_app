@@ -14,6 +14,7 @@ object Constants {
   //SUCCESS CONSTANTS
   const val SIGNUP_SUCCESS: String    = "SIGNUP_SUCCESS"
   const val LOGIN_SUCCESS: String     = "LOGIN_SUCCESS"
+  const val LOGOUT_SUCCESS: String    = "LOGOUT_SUCCESS"
   const val RESET: String             = "RESET"
 
 }

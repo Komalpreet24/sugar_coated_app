@@ -27,11 +27,13 @@
     <string name="password_validation">Password must be at least 6 characters</string>
     <string name="password_does_not_match">Password does not match</string>
     <string name="login_failed">Login failed with %1$s</string>
+    <string name="logout_failed">Logout failed with %1$s</string>
     <string name="signup_failed">Sign up failed with %1$s</string>
     <string name="unknown_error">Unknown Error</string>
 
     <!--Success Strings-->
     <string name="login_successful">Login Successful</string>
+    <string name="logout_successful">Logout Successful</string>
     <string name="signup_successful">Registration Successful, Please login.</string>
 
     <!--UI Strings-->

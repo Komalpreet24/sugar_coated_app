@@ -41,7 +41,11 @@
     <fragment
         android:id="@+id/settings_fragment"
         android:name="com.komal.sugarcoated.settings.ui.fragment.SettingsFragment"
-        android:label="fragment_settings"/>
+        android:label="fragment_settings">
+        <action
+            android:id="@+id/action_settings_fragment_to_login_fragment"
+            app:destination="@id/login_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/add_new_record_fragment"
