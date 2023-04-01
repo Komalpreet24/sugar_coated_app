@@ -1,16 +1,15 @@
 package com.komal.sugarcoated.signup.ui.fragment
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.komal.sugarcoated.R
 import com.komal.sugarcoated.databinding.FragmentSignupBinding
 import com.komal.sugarcoated.network.NetworkResult
 import com.komal.sugarcoated.signup.ui.vm.SignupViewModel
 import com.komal.sugarcoated.utils.*
+import com.komal.sugarcoated.utils.Constants.RESET
 
 class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding::inflate) {
 
@@ -59,16 +58,16 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
 
   private fun observeSignup() {
 
-    signupViewModel.signUpStatus.observe(viewLifecycleOwner, Observer { result->
+    signupViewModel.signUpStatus.observe(viewLifecycleOwner) { result ->
       result?.let {
-        when(it){
-          is NetworkResult.ResultOf.Success ->{
+        when (it) {
+          is NetworkResult.ResultOf.Success -> {
             hideProgress()
-            if(it.value.equals(Constants.SIGNUP_SUCCESS,ignoreCase = true)){
+            if (it.value.equals(Constants.SIGNUP_SUCCESS, ignoreCase = true)) {
               showToast(requireContext(), getString(R.string.signup_successful))
               signupViewModel.resetSignUpLiveData()
               navigateUpToLoginFragment()
-            } else{
+            }else if(!it.value.equals(RESET, ignoreCase = true)) {
               showToast(
                 requireContext(),
                 String.format(getString(R.string.signup_failed), it.value)
@@ -77,7 +76,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
           }
           is NetworkResult.ResultOf.Failure -> {
             hideProgress()
-            val failedMessage =  it.message ?: getString(R.string.unknown_error)
+            val failedMessage = it.message ?: getString(R.string.unknown_error)
             showToast(
               requireContext(),
               String.format(getString(R.string.signup_failed), failedMessage)
@@ -88,7 +87,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
           }
         }
       }
-    })
+    }
 
   }
 

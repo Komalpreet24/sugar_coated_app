@@ -1,8 +1,9 @@
 package com.komal.sugarcoated.splash.ui.vm
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 
-class SplashViewModel : ViewModel() {
-  // TODO: Implement the ViewModel
-  // Check if user is logged in or not
+
+class SplashViewModel(app: Application): AndroidViewModel(app) {
+
 }

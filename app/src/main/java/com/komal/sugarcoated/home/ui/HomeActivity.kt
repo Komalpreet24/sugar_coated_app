@@ -1,27 +1,22 @@
 package com.komal.sugarcoated.home.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.komal.sugarcoated.R
-import com.komal.sugarcoated.addNewRecord.ui.fragment.AddNewRecordFragment
 import com.komal.sugarcoated.databinding.ActivityHomeBinding
-import com.komal.sugarcoated.utils.ExitWithAnimation
-import com.komal.sugarcoated.utils.exitCircularReveal
+import com.komal.sugarcoated.home.ui.vm.HomeActivityViewModel
+
 
 class HomeActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityHomeBinding
   private var isHomeScreen = false
+  private val homeActivityViewModel by viewModels<HomeActivityViewModel>()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -31,6 +26,12 @@ class HomeActivity : AppCompatActivity() {
 
     setUpNavigation()
 
+    startNavigation()
+
+  }
+
+  private fun startNavigation() {
+    homeActivityViewModel.checkUserAuthStatus()
   }
 
   private fun setUpNavigation() {
@@ -74,6 +75,16 @@ class HomeActivity : AppCompatActivity() {
   override fun onSupportNavigateUp(): Boolean {
     val navController = findNavController(R.id.nav_host_fragment_container)
     return navController.navigateUp() || super.onSupportNavigateUp()
+  }
+
+  override fun onStart() {
+    super.onStart()
+    homeActivityViewModel.addAuthListener()
+  }
+
+  override fun onStop() {
+    super.onStop()
+    homeActivityViewModel.removeAuthListener()
   }
 
 }
