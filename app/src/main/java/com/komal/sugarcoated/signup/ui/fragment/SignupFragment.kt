@@ -21,7 +21,9 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
     binding.btnSignup.setOnClickListener {
 
       if(validate()){
-        signup(binding.etEmail.text.toString(),binding.etSetPassword.text.toString())
+        signup(binding.etEmail.text.toString(),
+          binding.etSetPassword.text.toString(),
+          binding.etName.text.toString())
       }
     }
 
@@ -35,6 +37,10 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
   }
 
   private fun validate(): Boolean {
+    if(binding.etName.text.isNullOrEmpty()){
+      binding.etEmail.error = getString(R.string.name_validation)
+      return false
+    }
     if(!isEmailValid(binding.etEmail.text.toString())){
       binding.etEmail.error = getString(R.string.email_validation)
       return false
@@ -51,8 +57,8 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
     return true
   }
 
-  private fun signup(email: String, password: String) {
-    signupViewModel.signUp(email, password)
+  private fun signup(email: String, password: String, name: String) {
+    signupViewModel.signUp(email, password, name)
     observeSignup()
   }
 

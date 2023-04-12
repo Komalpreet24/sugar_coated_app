@@ -1,10 +1,8 @@
 package com.komal.sugarcoated.login.ui.fragment
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.komal.sugarcoated.R
 import com.komal.sugarcoated.databinding.FragmentLoginBinding
@@ -53,19 +51,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
   private fun observeLogin() {
 
-    loginViewModel.loginStatus.observe(viewLifecycleOwner, Observer {result->
+    loginViewModel.loginStatus.observe(viewLifecycleOwner) { result ->
       result?.let {
-        when(it){
-          is NetworkResult.ResultOf.Success ->{
+        when (it) {
+          is NetworkResult.ResultOf.Success -> {
             hideProgress()
-            if(it.value.equals(Constants.LOGIN_SUCCESS,ignoreCase = true)){
+            if (it.value.equals(Constants.LOGIN_SUCCESS, ignoreCase = true)) {
               showToast(requireContext(), getString(R.string.login_successful))
               loginViewModel.resetLoginLiveData()
               navigateToHomeFragment()
-            }else if(it.value.equals(RESET,ignoreCase = true)){
-
-            }
-            else{
+            } else if (!it.value.equals(RESET, ignoreCase = true)) {
               showToast(
                 requireContext(),
                 String.format(getString(R.string.login_failed), it.value)
@@ -74,7 +69,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
           }
           is NetworkResult.ResultOf.Failure -> {
             hideProgress()
-            val failedMessage =  it.message ?: getString(R.string.unknown_error)
+            val failedMessage = it.message ?: getString(R.string.unknown_error)
             showToast(
               requireContext(),
               String.format(getString(R.string.login_failed), failedMessage)
@@ -85,7 +80,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
           }
         }
       }
-    })
+    }
 
   }
 

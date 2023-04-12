@@ -44,7 +44,9 @@
         android:label="fragment_settings">
         <action
             android:id="@+id/action_settings_fragment_to_login_fragment"
-            app:destination="@id/login_fragment" />
+            app:destination="@id/login_fragment"
+            app:popUpTo="@+id/navigation_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

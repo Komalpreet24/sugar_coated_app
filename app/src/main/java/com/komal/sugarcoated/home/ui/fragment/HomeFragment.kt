@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val homeViewModel by viewModels<HomeViewModel>()
     private lateinit var webView: WebView
-    private lateinit var url: String
+    private var url: String? = null
     private var isWebViewReloading = false
 
     override fun onCreateView(
@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
         binding.swipeContainer.setOnRefreshListener {
             binding.swipeContainer.isRefreshing = true
             Handler(Looper.getMainLooper()).postDelayed({
-                webView.loadUrl(url)
+                url?.let { webView.loadUrl(it) }
                 binding.swipeContainer.isRefreshing = false
             }, ONE_SECOND)
         }
@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
 
         url = homeViewModel.getTomatoSharedUrl()
 
-        webView.loadUrl(url)
+        url?.let { webView.loadUrl(it) }
 
         webView.settings.javaScriptEnabled = true
 
@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
                 view: WebView?,
                 request: WebResourceRequest?
             ): Boolean {
-                webView.loadUrl(url)
+                url?.let { webView.loadUrl(it) }
                 return true
             }
 
@@ -104,7 +104,7 @@ class HomeFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             reloadWebView()
             isWebViewReloading = true
-            webView.loadUrl(url)
+            url?.let { webView.loadUrl(it) }
         }, FIVE_MINUTES)
     }
 

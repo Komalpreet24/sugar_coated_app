@@ -26,11 +26,18 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (preferenceManager.findPreference("logout") as Preference?)?.onPreferenceClickListener =
+        (preferenceManager.findPreference<Preference>("logout"))?.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
                 logout()
                 true
             }
+
+        preferenceManager.findPreference<Preference>("web-view link")?.let {
+            it.setOnPreferenceChangeListener { _, newValue ->
+                updateUserDetails(newValue)
+                true
+            }
+        }
 
     }
 
@@ -50,9 +57,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                             showToast(requireContext(), getString(R.string.logout_successful))
                             loginViewModel.resetLoginLiveData()
                             navigateToLoginScreen()
-                        } else if (it.value.equals(RESET, ignoreCase = true)) {
-
-                        } else {
+                        }else if (!it.value.equals(RESET, ignoreCase = true)){
                             showToast(
                                 requireContext(),
                                 String.format(getString(R.string.logout_failed), it.value)
@@ -77,7 +82,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun navigateToLoginScreen() {
-        findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToLoginFragment())
+        findNavController().navigate(
+            SettingsFragmentDirections.actionSettingsFragmentToLoginFragment())
+    }
+
+    private fun updateUserDetails(newValue: Any?) {
+        loginViewModel.setUserData(newValue)
     }
 
 }

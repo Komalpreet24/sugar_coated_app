@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.komal.sugarcoated.network.NetworkResult.ResultOf
 import com.komal.sugarcoated.utils.Constants.LOGIN
 import com.komal.sugarcoated.utils.Constants.LOGIN_SUCCESS
@@ -21,6 +22,7 @@ import kotlinx.coroutines.launch
 class LoginViewModel(app: Application): AndroidViewModel(app) {
 
   private var  _auth: FirebaseAuth? = null
+  private var  _db: FirebaseFirestore? = null
   private val  _loginStatus  = MutableLiveData<ResultOf<String>>()
   private val _logoutStatus = MutableLiveData<ResultOf<String>>()
   val loginStatus: LiveData<ResultOf<String>> = _loginStatus
@@ -28,6 +30,7 @@ class LoginViewModel(app: Application): AndroidViewModel(app) {
 
   init {
     _auth = FirebaseAuth.getInstance()
+    _db = FirebaseFirestore.getInstance()
   }
 
   fun signIn(email:String, password:String){
@@ -74,6 +77,23 @@ class LoginViewModel(app: Application): AndroidViewModel(app) {
         _logoutStatus.postValue(ResultOf.Failure("${e.message}", e))
       }
     }
+  }
+
+  fun setUserData(newValue: Any?){
+
+    Log.d(LOGIN, "web-view link = ${newValue}, customerId = ${_auth?.uid}")
+
+    _auth?.uid?.let {
+      _db?.collection("users")?.document(it)
+        ?.update("webViewLink", newValue)
+        ?.addOnSuccessListener {
+          Log.d(LOGIN, "Web-view link ${newValue.toString()} updated for user ${_auth?.uid}")
+        }
+        ?.addOnFailureListener { exception ->
+          Log.w(LOGIN, "Error updating document $exception")
+        }
+    }
+
   }
 
 }

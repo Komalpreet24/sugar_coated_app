@@ -2,9 +2,6 @@
     <string name="app_name">Sugar Coated</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
@@ -24,6 +21,7 @@
 
     <!--Error Strings-->
     <string name="email_validation">Invalid email</string>
+    <string name="name_validation">Please enter your name</string>
     <string name="password_validation">Password must be at least 6 characters</string>
     <string name="password_does_not_match">Password does not match</string>
     <string name="login_failed">Login failed with %1$s</string>
@@ -40,7 +38,8 @@
     <!--UI Strings-->
     <string name="login">Login</string>
     <string name="signup">Sign Up</string>
-    <string name="sign_up_instead">Don\'t have an account? <u><font color='#FFE79D9D'>Sign up</font></u> here.</string>
+    <string name="sign_up_instead"> Don\'t have an account?
+                                    <u><font color='#FFE79D9D'>Sign up</font></u> here.</string>
     <string name="login_instead"><u><font color='#FFE79D9D'>Login</font></u> instead?</string>
     <string name="let_s_get_started">Let\'s get started!</string>
     <string name="name">Name</string>
@@ -49,5 +48,9 @@
     <string name="set_password">Set password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="forgot_password">Forgot password?</string>
+    <string name="following">Following</string>
+    <string name="graph_link">Graph link</string>
+    <string name="graph_link_description">Paste the web-view link from Tomato app
+                                    of the person you want to follow</string>
 
 </resources>
