@@ -62,7 +62,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/til_email"
-        android:text="You were missed!"/>
+        android:text="@string/you_were_missed"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_email"

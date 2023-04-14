@@ -52,5 +52,7 @@
     <string name="graph_link">Graph link</string>
     <string name="graph_link_description">Paste the web-view link from Tomato app
                                     of the person you want to follow</string>
+  <string name="add_new_record">Add New Record</string>
+  <string name="you_were_missed">You were missed!</string>
 
 </resources>
