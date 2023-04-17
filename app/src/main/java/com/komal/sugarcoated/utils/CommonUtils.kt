@@ -35,13 +35,14 @@ private fun show(context: Context?) {
   if (context != null) {
     progressBar = Dialog(context)
     progressBar?.setContentView(R.layout.progress_bar)
-    progressBar?.window?.setBackgroundDrawableResource(R.color.Transparent);
+    progressBar?.window?.setBackgroundDrawableResource(R.color.Transparent)
     progressBar?.show()
   }
 }
 
 private fun hide() {
-  if (progressBar != null) {
-    progressBar!!.dismiss()
+  if (progressBar != null && progressBar?.isShowing == true) {
+      progressBar?.dismiss()
+      progressBar = null
   }
 }

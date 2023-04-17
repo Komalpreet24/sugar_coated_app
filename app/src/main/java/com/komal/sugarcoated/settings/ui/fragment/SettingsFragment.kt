@@ -39,11 +39,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
 
+        observeLogout()
+
     }
 
     private fun logout() {
         loginViewModel.logout()
-        observeLogout()
     }
 
     private fun observeLogout() {

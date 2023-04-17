@@ -14,4 +14,17 @@
   <string name="confirm_password">Confirm Password</string>
   <string name="add_new_record">Add New Record</string>
   <string name="you_were_missed">You were missed!</string>
+  <string name="blood_sugar_underline">______</string>
+  <string name="blood_glucose_value">Blood Glusose Value</string>
+  <string name="fasting">Fasting</string>
+  <string name="lunch">Lunch</string>
+  <string name="snack">Snack</string>
+  <string name="dinner">Dinner</string>
+  <string name="random">Random</string>
+  <string name="bed_time">Bed Time</string>
+  <string name="note">Note</string>
+  <string name="date_and_time">Date and Time</string>
+  <string name="save">SAVE</string>
+  <string name="let_s_sign_you_in">Let\'s sign you in.</string>
+  <string name="sugar_coated_logo">Sugar coated logo</string>
 </resources>

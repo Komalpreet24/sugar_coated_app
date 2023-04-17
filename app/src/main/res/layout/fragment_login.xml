@@ -16,6 +16,7 @@
       app:layout_constraintHeight_percent=".3"
       android:src="@drawable/theme"
       android:background="@color/white"
+      android:contentDescription="@string/sugar_coated_logo"
       app:layout_constraintBottom_toTopOf="@+id/scroll_view"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintRight_toRightOf="parent"
@@ -50,7 +51,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tv_you_were_missed"
-        android:text="Let's sign you in."/>
+        android:text="@string/let_s_sign_you_in"/>
 
     <TextView
         android:id="@+id/tv_you_were_missed"
@@ -72,6 +73,7 @@
         android:layout_marginTop="24dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="@string/email"
+        android:autofillHints="emailAddress"
         app:layout_constraintTop_toBottomOf="@id/tv_you_were_missed"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -91,6 +93,7 @@
         android:layout_marginHorizontal="8dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="@string/password"
+        android:autofillHints="password"
         app:layout_constraintTop_toBottomOf="@id/til_email"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

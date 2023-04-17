@@ -38,7 +38,7 @@ class HomeActivityViewModel (app: Application): AndroidViewModel(app) {
   }
 
   fun removeAuthListener(){
-    fireAuthListener?.let { _auth?.removeAuthStateListener(it) }
+    fireAuthListener.let { _auth?.removeAuthStateListener(it) }
   }
 
 }

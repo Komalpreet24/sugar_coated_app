@@ -37,7 +37,7 @@
         android:maxLength="3"
         android:layout_marginHorizontal="8dp"
         android:layout_marginTop="24dp"
-        android:hint="______"
+        android:hint="@string/blood_sugar_underline"
         android:textColorHint="@color/GreenMain"
         android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
         android:background="@drawable/round_corner_drawable"
@@ -45,6 +45,7 @@
         android:singleLine="true"
         android:padding="16dp"
         android:gravity="center"
+        android:importantForAutofill="no"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_add_new_record"
@@ -54,7 +55,7 @@
         android:id="@+id/tv_blood_glucose_value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Blood Glusose Value"
+        android:text="@string/blood_glucose_value"
         android:layout_marginBottom="8dp"
         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:gravity="center_horizontal"
@@ -82,7 +83,7 @@
         android:id="@+id/tv_fasting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fasting"
+        android:text="@string/fasting"
         app:layout_constraintTop_toBottomOf="@+id/iv_fasting"
         app:layout_constraintStart_toStartOf="@id/iv_fasting"
         app:layout_constraintEnd_toEndOf="@id/iv_fasting"
@@ -107,7 +108,7 @@
         android:id="@+id/tv_breakfast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Breakfast"
+        android:text="@string/breakfast"
         app:layout_constraintTop_toBottomOf="@+id/iv_breakfast"
         app:layout_constraintStart_toStartOf="@id/iv_breakfast"
         app:layout_constraintEnd_toEndOf="@id/iv_breakfast"
@@ -134,7 +135,7 @@
         android:id="@+id/tv_lunch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lunch"
+        android:text="@string/lunch"
         app:layout_constraintTop_toBottomOf="@+id/iv_lunch"
         app:layout_constraintStart_toStartOf="@id/iv_lunch"
         app:layout_constraintEnd_toEndOf="@id/iv_lunch"
@@ -159,7 +160,7 @@
         android:id="@+id/tv_snack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Snack"
+        android:text="@string/snack"
         app:layout_constraintTop_toBottomOf="@id/iv_snack"
         app:layout_constraintStart_toStartOf="@id/iv_snack"
         app:layout_constraintEnd_toEndOf="@id/iv_snack"
@@ -184,7 +185,7 @@
         android:id="@+id/tv_dinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dinner"
+        android:text="@string/dinner"
         app:layout_constraintTop_toBottomOf="@+id/iv_dinner"
         app:layout_constraintStart_toStartOf="@id/iv_dinner"
         app:layout_constraintEnd_toEndOf="@id/iv_dinner" />
@@ -208,11 +209,10 @@
         android:id="@+id/tv_random"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Random"
+        android:text="@string/random"
         app:layout_constraintTop_toBottomOf="@+id/iv_random"
         app:layout_constraintStart_toStartOf="@id/iv_random"
-        app:layout_constraintEnd_toEndOf="@id/iv_random"
-        app:layout_constraintBottom_toTopOf="@id/til_date_and_time"/>
+        app:layout_constraintEnd_toEndOf="@id/iv_random"/>
 
     <CheckBox
         android:id="@+id/iv_before_bed"
@@ -233,7 +233,7 @@
         android:id="@+id/tv_before_bed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bed Time"
+        android:text="@string/bed_time"
         app:layout_constraintTop_toBottomOf="@+id/iv_before_bed"
         app:layout_constraintStart_toStartOf="@id/iv_before_bed"
         app:layout_constraintEnd_toEndOf="@id/iv_before_bed" />
@@ -248,7 +248,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_save"
-        android:hint="Note">
+        android:hint="@string/note">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_note"
@@ -266,11 +266,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:backgroundTint="@color/BeigeLight50Opacity"
-        android:hint="Date and Time"
+        android:hint="@string/date_and_time"
         app:layout_constraintTop_toBottomOf="@id/tv_random"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/til_date_and_time"
+        app:layout_constraintBottom_toTopOf="@id/til_note"
         app:endIconMode="custom"
         app:endIconDrawable="@drawable/icon_date_and_time">
 
@@ -294,7 +294,7 @@
         android:background="@drawable/button_background"
         android:backgroundTint="@color/BeigeLight50Opacity"
         android:textColor="@color/GreenDark"
-        android:text="SAVE"/>
+        android:text="@string/save"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

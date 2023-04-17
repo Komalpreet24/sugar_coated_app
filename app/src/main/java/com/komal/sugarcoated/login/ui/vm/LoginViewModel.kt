@@ -14,7 +14,6 @@ import com.komal.sugarcoated.network.NetworkResult.ResultOf
 import com.komal.sugarcoated.utils.Constants.LOGIN
 import com.komal.sugarcoated.utils.Constants.LOGIN_SUCCESS
 import com.komal.sugarcoated.utils.Constants.LOGOUT_SUCCESS
-import com.komal.sugarcoated.utils.Constants.RESET
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -23,9 +22,9 @@ class LoginViewModel(app: Application): AndroidViewModel(app) {
 
   private var  _auth: FirebaseAuth? = null
   private var  _db: FirebaseFirestore? = null
-  private val  _loginStatus  = MutableLiveData<ResultOf<String>>()
+  private val  _loginStatus  = MutableLiveData<ResultOf<String>?>()
   private val _logoutStatus = MutableLiveData<ResultOf<String>>()
-  val loginStatus: LiveData<ResultOf<String>> = _loginStatus
+  val loginStatus: MutableLiveData<ResultOf<String>?> = _loginStatus
   val logoutStatus: LiveData<ResultOf<String>> = _logoutStatus
 
   init {
@@ -47,20 +46,23 @@ class LoginViewModel(app: Application): AndroidViewModel(app) {
                 Log.d(LOGIN, "Login Failed with ${task.exception}")
                 _loginStatus.postValue(
                   ResultOf.Failure(
-                    "${task.exception}", task.exception))
+                    "${task.exception}", task.exception
+                  )
+                )
               }
             }
         }
 
       }catch (e:Exception){
         e.printStackTrace()
+        Log.e(LOGIN, "Login Failed with ${e.message}")
         _loginStatus.postValue(ResultOf.Failure("${e.message} ", e))
       }
     }
   }
 
   fun resetLoginLiveData(){
-    _loginStatus.value =  ResultOf.Success(RESET)
+    _loginStatus.value =  null
   }
 
   fun logout(){

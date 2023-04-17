@@ -30,6 +30,9 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
     binding.tvLogin.setOnClickListener{
       navigateUpToLoginFragment()
     }
+
+    observeSignup()
+
   }
 
   private fun navigateUpToLoginFragment() {
@@ -59,7 +62,6 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
 
   private fun signup(email: String, password: String, name: String) {
     signupViewModel.signUp(email, password, name)
-    observeSignup()
   }
 
   private fun observeSignup() {

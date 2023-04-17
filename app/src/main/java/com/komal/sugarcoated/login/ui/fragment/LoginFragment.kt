@@ -30,6 +30,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
       navigateToSignUpFragment()
     }
 
+    observeLogin()
+
   }
 
   private fun validate(): Boolean {
@@ -46,11 +48,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
   private fun login(email: String, password: String) {
     loginViewModel.signIn(email, password)
-    observeLogin()
   }
 
   private fun observeLogin() {
-
     loginViewModel.loginStatus.observe(viewLifecycleOwner) { result ->
       result?.let {
         when (it) {
@@ -58,7 +58,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             hideProgress()
             if (it.value.equals(Constants.LOGIN_SUCCESS, ignoreCase = true)) {
               showToast(requireContext(), getString(R.string.login_successful))
-              loginViewModel.resetLoginLiveData()
               navigateToHomeFragment()
             } else if (!it.value.equals(RESET, ignoreCase = true)) {
               showToast(
@@ -66,6 +65,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 String.format(getString(R.string.login_failed), it.value)
               )
             }
+            loginViewModel.resetLoginLiveData()
           }
           is NetworkResult.ResultOf.Failure -> {
             hideProgress()
@@ -74,6 +74,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
               requireContext(),
               String.format(getString(R.string.login_failed), failedMessage)
             )
+            loginViewModel.resetLoginLiveData()
           }
           is NetworkResult.ResultOf.Loading -> {
             showProgress(requireContext())
@@ -81,7 +82,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
       }
     }
-
   }
 
   private fun navigateToHomeFragment() {
