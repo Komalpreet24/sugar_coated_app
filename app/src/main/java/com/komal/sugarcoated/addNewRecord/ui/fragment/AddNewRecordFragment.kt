@@ -14,7 +14,7 @@ import com.komal.sugarcoated.addNewRecord.ui.vm.RecordViewModel
 import com.komal.sugarcoated.databinding.FragmentAddNewRecordBinding
 import com.komal.sugarcoated.network.NetworkResult
 import com.komal.sugarcoated.utils.*
-import com.komal.sugarcoated.utils.Constants.DATE_FORMAT
+import com.komal.sugarcoated.utils.Constants.DATE_TIME_FORMAT
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -64,7 +64,7 @@ class AddNewRecordFragment: BaseFragment<FragmentAddNewRecordBinding>
 
         binding.btnSave.setOnClickListener{
             if(validate()){
-                saveRecord(RecordDataModel( Date(),
+                saveRecord(RecordDataModel(
                     binding.etBloodSugar.editableText.toString(),
                     getCheckedIndex(),
                     binding.etDateAndTime.editableText.toString(),
@@ -86,7 +86,7 @@ class AddNewRecordFragment: BaseFragment<FragmentAddNewRecordBinding>
         val startHour = currentDateTime.get(Calendar.HOUR_OF_DAY)
         val startMinute = currentDateTime.get(Calendar.MINUTE)
         val currentTime = Calendar.getInstance().time
-        val sdf = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+        val sdf = SimpleDateFormat(DATE_TIME_FORMAT, Locale.getDefault())
         var pickedDateTime: Calendar
         this.setText(sdf.format(currentTime.time))
 

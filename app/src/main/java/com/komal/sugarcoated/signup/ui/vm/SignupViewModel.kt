@@ -66,7 +66,7 @@ class SignupViewModel(app: Application): AndroidViewModel(app) {
 
     _auth?.uid?.let {
       _db?.collection("users")?.document(it)
-        ?.set(UserSignUpData(name = name, email = email, id = _auth?.uid))
+        ?.set(UserSignUpData(name = name, email = email, id = it))
         ?.addOnSuccessListener {
           Log.d(SIGNUP, "Added document with ID ${_auth?.uid}")
           _signUpStatus.postValue(ResultOf.Success(SIGNUP_SUCCESS))

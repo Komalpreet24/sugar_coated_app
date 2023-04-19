@@ -27,4 +27,7 @@
   <string name="save">SAVE</string>
   <string name="let_s_sign_you_in">Let\'s sign you in.</string>
   <string name="sugar_coated_logo">Sugar coated logo</string>
+  <string name="category_icon">Category Icon</string>
+  <string name="mg_dl">mg/dL</string>
+  <string name="plus_button_for_add_new_record">Plus button for add new record</string>
 </resources>

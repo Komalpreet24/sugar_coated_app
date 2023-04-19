@@ -1,29 +1,63 @@
 package com.komal.sugarcoated.logBook.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.komal.sugarcoated.R
 import com.komal.sugarcoated.databinding.FragmentLogBookBinding
+import com.komal.sugarcoated.logBook.ui.vm.LogBookViewModel
+import com.komal.sugarcoated.network.NetworkResult
+import com.komal.sugarcoated.utils.*
 
-class LogBookFragment : Fragment() {
+class LogBookFragment : BaseFragment<FragmentLogBookBinding>(FragmentLogBookBinding::inflate) {
 
-    lateinit var binding: FragmentLogBookBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentLogBookBinding.inflate(layoutInflater)
-        return binding.root
-    }
+    private val logBookViewModel by viewModels<LogBookViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textView1.text = "LOG BOOK FRAGMENT"
+        binding.rvRecords.layoutManager = LinearLayoutManager(requireContext())
+        observeRecordList()
+        getRecordList()
+
+    }
+
+    private fun getRecordList() {
+        logBookViewModel.getRecordList()
+    }
+
+    private fun observeRecordList() {
+        logBookViewModel.recordList.observe(viewLifecycleOwner) { result ->
+            result?.let {
+                when (it) {
+                    is NetworkResult.ResultOf.Success -> {
+                        hideProgress()
+                        if (it.value?.size!! > 0) {
+                            binding.rvRecords.adapter = LogBookAdapter(it.value)
+                        } else {
+                            showToast(
+                                requireContext(),
+                                String.format(getString(R.string.records_fetching_failed), it.value)
+                            )
+                        }
+                        logBookViewModel.resetRecordListData()
+                    }
+                    is NetworkResult.ResultOf.Failure -> {
+                        hideProgress()
+                        val failedMessage = it.message ?: getString(R.string.unknown_error)
+                        showToast(
+                            requireContext(),
+                            String.format(getString(R.string.records_fetching_failed), failedMessage)
+                        )
+                        logBookViewModel.resetRecordListData()
+                    }
+                    is NetworkResult.ResultOf.Loading -> {
+                        showProgress(requireContext())
+                    }
+                }
+            }
+        }
     }
 
 }

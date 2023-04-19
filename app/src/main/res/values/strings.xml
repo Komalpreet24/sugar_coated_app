@@ -30,6 +30,7 @@
     <string name="logout_failed">Logout failed with %1$s</string>
     <string name="signup_failed">Sign up failed with %1$s</string>
     <string name="auth_status_check_failed">Auth status check failed with %1$s</string>
+    <string name="records_fetching_failed">Failed to fetch records with %1$s</string>
     <string name="unknown_error">Unknown Error</string>
     <string name="invalid_date_and_time">Can not select a time in the future</string>
 
@@ -59,7 +60,7 @@
   <string name="add_new_record">Add New Record</string>
   <string name="you_were_missed">You were missed!</string>
     <string name="blood_sugar_underline">______</string>
-    <string name="blood_glucose_value">Blood Glusose Value</string>
+    <string name="blood_glucose_value">Blood Glucose Value (mg/dL)</string>
     <string name="fasting">Fasting</string>
     <string name="breakfast">Breakfast</string>
     <string name="lunch">Lunch</string>
@@ -72,5 +73,8 @@
     <string name="save">SAVE</string>
   <string name="let_s_sign_you_in">Let\'s sign you in.</string>
   <string name="sugar_coated_logo">Sugar coated logo</string>
+  <string name="category_icon">Category Icon</string>
+  <string name="mg_dl">mg/dL</string>
+  <string name="plus_button_for_add_new_record">Plus button for add new record</string>
 
 </resources>

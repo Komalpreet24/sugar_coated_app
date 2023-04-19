@@ -24,7 +24,7 @@ class LoginViewModel(app: Application): AndroidViewModel(app) {
   private var  _db: FirebaseFirestore? = null
   private val  _loginStatus  = MutableLiveData<ResultOf<String>?>()
   private val _logoutStatus = MutableLiveData<ResultOf<String>>()
-  val loginStatus: MutableLiveData<ResultOf<String>?> = _loginStatus
+  val loginStatus: LiveData<ResultOf<String>?> = _loginStatus
   val logoutStatus: LiveData<ResultOf<String>> = _logoutStatus
 
   init {
