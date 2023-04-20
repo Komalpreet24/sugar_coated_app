@@ -9,11 +9,19 @@ object Constants {
   const val DATE_TIME_FORMAT: String  = "MMMM dd, yyyy hh:mm a"
   const val DATE_FORMAT: String       = "MMMM dd, yyyy"
   const val TIME_FORMAT: String       = "hh:mm a"
+  const val BREAKFAST: String         = "Breakfast"
+  const val LUNCH: String             = "Lunch"
+  const val SNACK: String             = "Snack"
+  const val DINNER: String            = "Dinner"
+  const val FASTING: String           = "Fasting"
+  const val RANDOM: String            = "Random"
+  const val BED_TIME: String          = "Bed Time"
 
   //TAGS
   const val SIGNUP: String        = "SIGNUP"
   const val LOGIN: String         = "LOGIN"
   const val SAVE_RECORD: String   = "SAVE_RECORD"
+  const val FETCH_RECORDS: String = "FETCH_RECORDS"
 
   //SUCCESS CONSTANTS
   const val SIGNUP_SUCCESS: String      = "SIGNUP_SUCCESS"

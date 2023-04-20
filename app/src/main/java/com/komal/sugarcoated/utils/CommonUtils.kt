@@ -6,9 +6,6 @@ import android.widget.Toast
 import com.komal.sugarcoated.R
 import com.komal.sugarcoated.utils.Constants.EMAIL_REGEX
 import com.komal.sugarcoated.utils.Constants.PASSWORD_REGEX
-import com.komal.sugarcoated.utils.Constants.TIME_FORMAT
-import java.text.SimpleDateFormat
-import java.util.*
 
 private var progressBar: Dialog? = null
 
@@ -32,12 +29,12 @@ fun isPasswordValid(password: String): Boolean{
   return password.matches(PASSWORD_REGEX.toRegex())
 }
 
-fun getTimeFromDate(dateAndTime: String): String{
-
-  val date = SimpleDateFormat(Constants.DATE_TIME_FORMAT, Locale.US).parse(dateAndTime)
-  return SimpleDateFormat(TIME_FORMAT, Locale.US).format(date as Date)
-
-}
+//fun getTimeFromDate(dateAndTime: String): String{
+//
+//  val date = SimpleDateFormat(Constants.DATE_TIME_FORMAT, Locale.getDefault()).parse(dateAndTime)
+//  return SimpleDateFormat(TIME_FORMAT, Locale.US).format(date as Date)
+//
+//}
 
 /*---Private Functions---*/
 

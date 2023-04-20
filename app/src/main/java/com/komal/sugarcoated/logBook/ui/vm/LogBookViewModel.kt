@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.komal.sugarcoated.addNewRecord.model.RecordDataModel
 import com.komal.sugarcoated.network.NetworkResult
-import com.komal.sugarcoated.signup.model.UserSignUpData
 import com.komal.sugarcoated.utils.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,23 +30,26 @@ class LogBookViewModel(app: Application): AndroidViewModel(app) {
     viewModelScope.launch(Dispatchers.IO){
       try{
 
-          _auth?.uid?.let {
-            _db?.collection("users")?.document(it)?.get()
-              ?.addOnSuccessListener { document ->
-              if (document.exists()) {
-                val user = document.toObject(UserSignUpData::class.java)
-                val records: ArrayList<RecordDataModel>? = user?.recordList
-                _recordList.postValue(NetworkResult.ResultOf.Success(records))
+        _auth?.uid?.let { uid ->
+          _db?.collection("blood_sugar_records")
+            ?.whereEqualTo("userId", uid)
+            ?.get()
+            ?.addOnSuccessListener {documents ->
+              val recordList = ArrayList<RecordDataModel>()
+              for (document in documents) {
+                val record = document.toObject(RecordDataModel::class.java)
+                recordList.add(record)
+              }
+              _recordList.postValue(NetworkResult.ResultOf.Success(recordList))
               }
             }?.addOnFailureListener { exception ->
-                _recordList.postValue(
-                  NetworkResult.ResultOf.Failure("${exception.message} ", exception))
+              _recordList.postValue(
+                NetworkResult.ResultOf.Failure("${exception.message} ", exception))
             }
-          }
 
       }catch (e:Exception){
         e.printStackTrace()
-        Log.e(Constants.LOGIN, "Login Failed with ${e.message}")
+        Log.e(Constants.FETCH_RECORDS, "getRecordList Failed with ${e.message}")
         _recordList.postValue(NetworkResult.ResultOf.Failure("${e.message} ", e))
       }
     }

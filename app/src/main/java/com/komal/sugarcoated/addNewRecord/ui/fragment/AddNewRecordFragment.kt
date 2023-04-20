@@ -64,11 +64,14 @@ class AddNewRecordFragment: BaseFragment<FragmentAddNewRecordBinding>
 
         binding.btnSave.setOnClickListener{
             if(validate()){
-                saveRecord(RecordDataModel(
-                    binding.etBloodSugar.editableText.toString(),
-                    getCheckedIndex(),
-                    binding.etDateAndTime.editableText.toString(),
-                    binding.etNote.editableText.toString()))
+                SimpleDateFormat(DATE_TIME_FORMAT, Locale.getDefault())
+                    .parse(binding.etDateAndTime.editableText.toString())?.let { date ->
+                        RecordDataModel(
+                            binding.etBloodSugar.editableText.toString(),
+                            getCheckedIndex(),
+                            date,
+                            binding.etNote.editableText.toString())
+                    }?.let { recordModel -> saveRecord(recordModel) }
             }
         }
 

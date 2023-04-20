@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.komal.sugarcoated.addNewRecord.model.RecordDataModel
 import com.komal.sugarcoated.network.NetworkResult
@@ -33,8 +32,9 @@ class RecordViewModel(app: Application): AndroidViewModel(app) {
       try{
 
         _auth?.uid?.let {
-          _db?.collection("users")?.document(it)
-            ?.update("recordList", FieldValue.arrayUnion(recordData))
+          recordData.userId = it
+          _db?.collection("blood_sugar_records")?.document()
+            ?.set(recordData)
             ?.addOnSuccessListener {
               Log.d(Constants.SAVE_RECORD, "Added new record with ID ${_auth?.uid}")
               _saveRecordStatus.postValue(

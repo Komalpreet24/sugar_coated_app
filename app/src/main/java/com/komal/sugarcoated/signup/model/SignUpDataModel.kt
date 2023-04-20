@@ -1,7 +1,6 @@
 package com.komal.sugarcoated.signup.model
 
 import com.google.firebase.firestore.DocumentId
-import com.komal.sugarcoated.addNewRecord.model.RecordDataModel
 
 data class UserSignUpData(
   @DocumentId
@@ -9,5 +8,4 @@ data class UserSignUpData(
   val name: String = "",
   val email: String = "",
   val webViewLink: String = "",
-  val recordList: ArrayList<RecordDataModel> = arrayListOf()
 )

@@ -2,15 +2,23 @@ package com.komal.sugarcoated.logBook.ui.fragment
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.komal.sugarcoated.R
 import com.komal.sugarcoated.addNewRecord.model.RecordDataModel
-import com.komal.sugarcoated.utils.getTimeFromDate
+import com.komal.sugarcoated.utils.Constants.BED_TIME
+import com.komal.sugarcoated.utils.Constants.BREAKFAST
+import com.komal.sugarcoated.utils.Constants.DINNER
+import com.komal.sugarcoated.utils.Constants.FASTING
+import com.komal.sugarcoated.utils.Constants.LUNCH
+import com.komal.sugarcoated.utils.Constants.RANDOM
+import com.komal.sugarcoated.utils.Constants.SNACK
+import com.komal.sugarcoated.utils.Constants.TIME_FORMAT
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class LogBookAdapter(private val recordList: ArrayList<RecordDataModel>)
       : RecyclerView.Adapter<LogBookAdapter.LogBookViewHolder>() {
@@ -29,31 +37,31 @@ class LogBookAdapter(private val recordList: ArrayList<RecordDataModel>)
 
     val record = recordList[holder.adapterPosition]
     holder.bloodSugarValue.text = record.bloodSugarValue
-    holder.time.text = getTimeFromDate(record.dateAndTime.trimIndent())
+    holder.time.text = SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).format(record.dateAndTime)
 
     val categoryIcon:Int =
 
       when(record.category){
 
-      "Breakfast" -> {
+      BREAKFAST -> {
         R.drawable.icon_breakfast
       }
-      "Lunch"     -> {
+      LUNCH     -> {
         R.drawable.icon_lunch
       }
-      "Snack"     -> {
+      SNACK     -> {
         R.drawable.icon_snack
       }
-      "Dinner"    -> {
+      DINNER    -> {
         R.drawable.icon_dinner
       }
-      "Fasting"   -> {
+      FASTING   -> {
         R.drawable.icon_sun
       }
-      "Random"    -> {
+      RANDOM    -> {
         R.drawable.icon_random
       }
-      "Bed Time"  -> {
+      BED_TIME  -> {
         R.drawable.icon_before_bed
       }
       else -> {
@@ -63,12 +71,7 @@ class LogBookAdapter(private val recordList: ArrayList<RecordDataModel>)
     }
 
     holder.categoryIcon.setImageResource(categoryIcon)
-    if(record.note == ""){
-      holder.note.visibility = GONE
-    }else{
-      holder.note.visibility = VISIBLE
-      holder.note.text = record.note
-    }
+    holder.note.text = record.note
 
   }
 
