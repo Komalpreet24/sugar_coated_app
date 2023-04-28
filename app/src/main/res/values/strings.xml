@@ -26,6 +26,7 @@
     <string name="blood_sugar_value_validation">Please enter blood glucose value</string>
     <string name="password_does_not_match">Password does not match</string>
     <string name="login_failed">Login failed with %1$s</string>
+    <string name="logging_event">Logging event failed with %1$s</string>
     <string name="new_record_addition_failed">New record addition failed with %1$s</string>
     <string name="logout_failed">Logout failed with %1$s</string>
     <string name="signup_failed">Sign up failed with %1$s</string>
@@ -57,8 +58,8 @@
     <string name="graph_link">Graph link</string>
     <string name="graph_link_description">Paste the web-view link from Tomato app
                                     of the person you want to follow</string>
-  <string name="add_new_record">Add New Record</string>
-  <string name="you_were_missed">You were missed!</string>
+    <string name="add_new_record">Add New Record</string>
+    <string name="you_were_missed">You were missed!</string>
     <string name="blood_sugar_underline">______</string>
     <string name="blood_glucose_value">Blood Glucose Value (mg/dL)</string>
     <string name="fasting">Fasting</string>
@@ -71,10 +72,16 @@
     <string name="note">Note</string>
     <string name="date_and_time">Date and Time</string>
     <string name="save">SAVE</string>
-  <string name="let_s_sign_you_in">Let\'s sign you in.</string>
-  <string name="sugar_coated_logo">Sugar coated logo</string>
-  <string name="category_icon">Category Icon</string>
-  <string name="mg_dl">mg/dL</string>
-  <string name="plus_button_for_add_new_record">Plus button for add new record</string>
+    <string name="let_s_sign_you_in">Let\'s sign you in.</string>
+    <string name="sugar_coated_logo">Sugar coated logo</string>
+    <string name="category_icon">Category Icon</string>
+    <string name="mg_dl">mg/dL</string>
+    <string name="plus_button_for_add_new_record">Plus button for add new record</string>
+    <string name="infusion_set_change_n_done">Infusion set change \n done</string>
+    <string name="sensor_change_n_logged">Sensor change \n logged</string>
+    <string name="infusion_set_n_changed">Infusion set \n changed</string>
+    <string name="mark_an_event">Mark an event</string>
+    <string name="sensor_n_change">Sensor \n change</string>
+    <string name="green_tick">Green Tick</string>
 
 </resources>
