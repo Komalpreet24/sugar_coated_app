@@ -20,11 +20,12 @@ object Constants {
   const val INFUSION_SET_CHANGE: String = "infusionSetChangeDate"
 
   //TAGS
-  const val SIGNUP: String        = "SIGNUP"
-  const val LOGIN: String         = "LOGIN"
-  const val SAVE_RECORD: String   = "SAVE_RECORD"
-  const val FETCH_RECORDS: String = "FETCH_RECORDS"
-  const val EVENT_LOG: String     = "EVENT_LOG"
+  const val SIGNUP: String            = "SIGNUP"
+  const val LOGIN: String             = "LOGIN"
+  const val SAVE_RECORD: String       = "SAVE_RECORD"
+  const val FETCH_RECORDS: String     = "FETCH_RECORDS"
+  const val EVENT_LOG: String         = "EVENT_LOG"
+  const val LAST_CHANGED_DATE: String = "LAST_CHANGED_DATE"
 
   //SUCCESS CONSTANTS
   const val SIGNUP_SUCCESS: String      = "SIGNUP_SUCCESS"

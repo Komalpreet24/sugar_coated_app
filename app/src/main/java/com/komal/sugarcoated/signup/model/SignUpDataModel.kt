@@ -12,3 +12,5 @@ data class UserSignUpData(
   val sensorChangeDate: Date = Date(),
   val infusionSetChangeDate: Date = Date()
 )
+
+data class ChangeDates(val sensorChangeDate: Date?, val infusionSetChangeDate: Date?)

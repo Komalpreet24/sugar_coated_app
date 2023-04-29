@@ -27,6 +27,7 @@
     <string name="password_does_not_match">Password does not match</string>
     <string name="login_failed">Login failed with %1$s</string>
     <string name="logging_event">Logging event failed with %1$s</string>
+    <string name="fetch_today_event">Fetch today\'s event failed with %1$s</string>
     <string name="new_record_addition_failed">New record addition failed with %1$s</string>
     <string name="logout_failed">Logout failed with %1$s</string>
     <string name="signup_failed">Sign up failed with %1$s</string>

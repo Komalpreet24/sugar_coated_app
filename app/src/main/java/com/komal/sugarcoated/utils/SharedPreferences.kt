@@ -37,6 +37,16 @@ class AppSharedPreferences private constructor(context: Context){
 
   val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)
 
+  fun setTodayForSensorChange(isSensorChangedToday: Boolean) =
+    sharedPref.edit().putBoolean("isSensorChangedToday", isSensorChangedToday).apply()
+
+  val isSensorChangedToday = sharedPref.getBoolean("isSensorChangedToday", false)
+
+  fun setTodayForInfusionSetChange(isInfusionSetChangedToday: Boolean) =
+    sharedPref.edit().putBoolean("isInfusionSetChangedToday", isInfusionSetChangedToday).apply()
+
+  val isInfusionSetChangedToday = sharedPref.getBoolean("isInfusionSetChangedToday", false)
+
   fun resetLoginData() {
     sharedPref.edit().clear().apply()
   }
