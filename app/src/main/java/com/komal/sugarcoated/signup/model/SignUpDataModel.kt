@@ -10,7 +10,8 @@ data class UserSignUpData(
   val email: String = "",
   val webViewLink: String = "",
   val sensorChangeDate: Date = Date(),
-  val infusionSetChangeDate: Date = Date()
+  val infusionSetChangeDate: Date = Date(),
+  val sensorSupplies: Int = 0,
+  val infusionSetSupplies: Int = 0,
+  val insulinSupplies: Int = 0
 )
-
-data class ChangeDates(val sensorChangeDate: Date?, val infusionSetChangeDate: Date?)

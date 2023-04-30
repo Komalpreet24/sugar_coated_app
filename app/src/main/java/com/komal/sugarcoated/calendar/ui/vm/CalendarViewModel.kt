@@ -9,18 +9,20 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.komal.sugarcoated.network.NetworkResult
-import com.komal.sugarcoated.signup.model.ChangeDates
 import com.komal.sugarcoated.utils.AppSharedPreferences
 import com.komal.sugarcoated.utils.Constants.EVENT_LOG
 import com.komal.sugarcoated.utils.Constants.INFUSION_SET_CHANGE
-import com.komal.sugarcoated.utils.Constants.LAST_CHANGED_DATE
+import com.komal.sugarcoated.utils.Constants.INFUSION_SET_SUPPLIES
+import com.komal.sugarcoated.utils.Constants.INSULIN_SUPPLIES
 import com.komal.sugarcoated.utils.Constants.RESET
+import com.komal.sugarcoated.utils.Constants.SAVE_SUPPLIES
+import com.komal.sugarcoated.utils.Constants.SAVE_SUPPLIES_SUCCESS
 import com.komal.sugarcoated.utils.Constants.SENSOR_CHANGE
+import com.komal.sugarcoated.utils.Constants.SENSOR_SUPPLIES
 import com.komal.sugarcoated.utils.EventDecorator
-import java.util.*
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import java.text.SimpleDateFormat
-import kotlin.collections.HashSet
+import java.util.*
 
 class CalendarViewModel(app: Application): AndroidViewModel(app) {
 
@@ -28,19 +30,16 @@ class CalendarViewModel(app: Application): AndroidViewModel(app) {
   private var  _db: FirebaseFirestore? = null
   private val  _logEventStatus  = MutableLiveData<NetworkResult.ResultOf<String>?>()
   val logEventStatus: LiveData<NetworkResult.ResultOf<String>?> = _logEventStatus
-  private val  _lastChangedStatus  = MutableLiveData<NetworkResult.ResultOf<ChangeDates>?>()
-  val lastChangedStatus: LiveData<NetworkResult.ResultOf<ChangeDates>?> = _lastChangedStatus
+  private val  _saveSuppliesStatus  = MutableLiveData<NetworkResult.ResultOf<String>?>()
+  val saveSuppliesStatus: LiveData<NetworkResult.ResultOf<String>?> = _saveSuppliesStatus
   private var sharedPreferences: AppSharedPreferences? = null
+
 
   init {
     _auth = FirebaseAuth.getInstance()
     _db = FirebaseFirestore.getInstance()
     sharedPreferences = AppSharedPreferences.getInstance(app)
   }
-
-    private var sensorChangeDates = hashSetOf<CalendarDay>()
-    private var infusionSetChangeDates = hashSetOf<CalendarDay>()
-    private var overlappingEventDates = hashSetOf<CalendarDay>()
 
     private val overlappingEventColors = intArrayOf(
       Color.rgb(255, 0, 0),
@@ -53,21 +52,29 @@ class CalendarViewModel(app: Application): AndroidViewModel(app) {
       Color.rgb(0, 0, 255),
     )
 
-    fun getOverlappingMarker(): EventDecorator {
+    fun getOverlappingMarker(sensorChangeDate: Date, infusionSetChangeDate: Date): EventDecorator {
+
+      val sensorChangeDates = getDatesWithFrequency(sensorChangeDate, 14)
+      val infusionSetChangeDates = getDatesWithFrequency(infusionSetChangeDate, 4)
+
+      val overlappingEventDates: HashSet<CalendarDay> =
+        infusionSetChangeDates.intersect(sensorChangeDates).toHashSet()
+      sensorChangeDates.removeAll(overlappingEventDates)
+      infusionSetChangeDates.removeAll(overlappingEventDates)
+
       return EventDecorator(overlappingEventDates, overlappingEventColors)
     }
 
-    fun getSensorMarker(): EventDecorator {
-      return EventDecorator(sensorChangeDates, sensorChangeColors)
-
+    fun getSensorMarker(sensorChangeDate: Date): EventDecorator {
+      return EventDecorator(getDatesWithFrequency(sensorChangeDate, 14), sensorChangeColors)
     }
 
-    fun getInfusionSetMarker(): EventDecorator {
-      return EventDecorator(infusionSetChangeDates, infusionSetChangeColors)
+    fun getInfusionSetMarker(infusionSetChangeDate: Date): EventDecorator {
+      return EventDecorator(getDatesWithFrequency(infusionSetChangeDate, 4), infusionSetChangeColors)
     }
 
 
-  fun handleDateSelection(date: CalendarDay, eventMarker: String) {
+    fun handleDateSelection(date: CalendarDay, eventMarker: String) {
         logEvent(date, eventMarker)
     }
 
@@ -107,6 +114,62 @@ class CalendarViewModel(app: Application): AndroidViewModel(app) {
 
     }
 
+    fun saveSupplies(sensorSupplies: Int, infusionSetSupplies: Int, insulinSupplies: Int){
+
+      Log.d(SAVE_SUPPLIES, "Save supplies $sensorSupplies, $infusionSetSupplies," +
+                                " $insulinSupplies , customerId = ${_auth?.uid}")
+      _saveSuppliesStatus.value = NetworkResult.ResultOf.Loading
+      _auth?.uid?.let {
+
+        val docRef = _db?.collection("users")?.document(it)
+
+        docRef?.get()
+          ?.addOnSuccessListener { document ->
+
+            val existingSensorSupplies = document.get(SENSOR_SUPPLIES)
+            val existingInfusionSetSupplies = document.get(INFUSION_SET_SUPPLIES)
+            val existingInsulinSupplies = document.get(INSULIN_SUPPLIES)
+
+            if (existingSensorSupplies != sensorSupplies ||
+              existingInfusionSetSupplies != infusionSetSupplies ||
+              existingInsulinSupplies != insulinSupplies
+            ) {
+
+              val updates = hashMapOf<String, Any>()
+              if (existingSensorSupplies != sensorSupplies) {
+                updates[SENSOR_SUPPLIES] = sensorSupplies
+              }
+              if (existingInfusionSetSupplies != infusionSetSupplies) {
+                updates[INFUSION_SET_SUPPLIES] = infusionSetSupplies
+              }
+              if (existingInsulinSupplies != insulinSupplies) {
+                updates[INSULIN_SUPPLIES] = insulinSupplies
+              }
+
+              docRef.update(updates)
+                .addOnSuccessListener {
+                  _saveSuppliesStatus.postValue(NetworkResult.ResultOf.Success(SAVE_SUPPLIES_SUCCESS))
+                  Log.d(SAVE_SUPPLIES, "Save supplies updated for user ${_auth?.uid}")
+                }
+                .addOnFailureListener { exception ->
+                  _saveSuppliesStatus.postValue(
+                    NetworkResult.ResultOf.Failure("$exception", exception))
+                  Log.w(SAVE_SUPPLIES, "Error updating document", exception)
+                }
+
+            }
+          }
+              ?.addOnFailureListener { exception ->
+                _saveSuppliesStatus.postValue(
+                  NetworkResult.ResultOf.Failure(
+                    "$exception", exception
+                  )
+                )
+                Log.w(SAVE_SUPPLIES, "Error updating document $exception")
+              }
+          }
+    }
+
     private fun calendarDayToDate(calendarDay: CalendarDay): Date? {
 
         val calendar = Calendar.getInstance()
@@ -117,44 +180,6 @@ class CalendarViewModel(app: Application): AndroidViewModel(app) {
 
     }
 
-    fun getLastChangedDate(){
-
-      Log.d(LAST_CHANGED_DATE, "Fetching event for date, customerId = ${_auth?.uid}")
-      _lastChangedStatus.value = NetworkResult.ResultOf.Loading
-      _auth?.uid?.let {
-        _db?.collection("users")?.document(it)?.get()
-          ?.addOnSuccessListener { document ->
-
-            val sensorChangeDate = document.getDate(SENSOR_CHANGE)
-            val infusionSetChangeDate = document.getDate(INFUSION_SET_CHANGE)
-
-            if (sensorChangeDate != null) {
-              sensorChangeDates = getDatesWithFrequency(sensorChangeDate, 14)
-            }
-
-            if (infusionSetChangeDate != null) {
-              infusionSetChangeDates = getDatesWithFrequency(infusionSetChangeDate, 4)
-            }
-
-            overlappingEventDates = infusionSetChangeDates.intersect(sensorChangeDates).toHashSet()
-            sensorChangeDates.removeAll(overlappingEventDates)
-            infusionSetChangeDates.removeAll(overlappingEventDates)
-
-            _lastChangedStatus.postValue(
-              NetworkResult.ResultOf.Success(ChangeDates(sensorChangeDate, infusionSetChangeDate)))
-            Log.d(LAST_CHANGED_DATE, "Fetching last changed for user ${_auth?.uid}")
-
-          }
-          ?.addOnFailureListener { exception ->
-            _lastChangedStatus.postValue(
-              NetworkResult.ResultOf.Failure(
-                "$exception", exception
-              ))
-            Log.w(LAST_CHANGED_DATE, "Error updating document $exception")
-          }
-      }
-
-    }
 
   fun saveEventChangeDates(eventMarkedToday: String){
       sharedPreferences?.setTodayForSensorChange(eventMarkedToday == SENSOR_CHANGE)
