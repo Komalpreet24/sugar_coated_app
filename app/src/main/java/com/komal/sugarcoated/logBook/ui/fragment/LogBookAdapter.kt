@@ -10,12 +10,12 @@ import com.komal.sugarcoated.R
 import com.komal.sugarcoated.addNewRecord.model.RecordDataModel
 import com.komal.sugarcoated.utils.Constants.BED_TIME
 import com.komal.sugarcoated.utils.Constants.BREAKFAST
+import com.komal.sugarcoated.utils.Constants.DATE_TIME_FORMAT
 import com.komal.sugarcoated.utils.Constants.DINNER
 import com.komal.sugarcoated.utils.Constants.FASTING
 import com.komal.sugarcoated.utils.Constants.LUNCH
 import com.komal.sugarcoated.utils.Constants.RANDOM
 import com.komal.sugarcoated.utils.Constants.SNACK
-import com.komal.sugarcoated.utils.Constants.TIME_FORMAT
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -37,7 +37,8 @@ class LogBookAdapter(private val recordList: ArrayList<RecordDataModel>)
 
     val record = recordList[holder.adapterPosition]
     holder.bloodSugarValue.text = record.bloodSugarValue
-    holder.time.text = SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).format(record.dateAndTime)
+    holder.time.text = SimpleDateFormat(DATE_TIME_FORMAT,
+                        Locale.getDefault()).format(record.dateAndTime)
 
     val categoryIcon:Int =
 

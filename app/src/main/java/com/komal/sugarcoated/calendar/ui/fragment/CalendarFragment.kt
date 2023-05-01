@@ -16,8 +16,10 @@ import com.komal.sugarcoated.home.ui.vm.HomeActivityViewModel
 import com.komal.sugarcoated.network.NetworkResult
 import com.komal.sugarcoated.signup.model.UserSignUpData
 import com.komal.sugarcoated.utils.*
+import com.komal.sugarcoated.utils.Constants.INFUSION_SETS
 import com.komal.sugarcoated.utils.Constants.INFUSION_SET_CHANGE
 import com.komal.sugarcoated.utils.Constants.SAVE_SUPPLIES_SUCCESS
+import com.komal.sugarcoated.utils.Constants.SENSOR
 import com.komal.sugarcoated.utils.Constants.SENSOR_CHANGE
 import com.mcdev.quantitizerlibrary.AnimationStyle
 import com.mcdev.quantitizerlibrary.HorizontalQuantitizer
@@ -155,13 +157,13 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
             hideProgress()
 
             val userData: UserSignUpData = it.value
+            calendarView.addDecorator(
+              calendarViewModel.getOverlappingMarker( userData.sensorChangeDate,
+                userData.infusionSetChangeDate))
               calendarView.addDecorator(
-                calendarViewModel.getSensorMarker(userData.sensorChangeDate))
+                calendarViewModel.getSensorMarker())
               calendarView.addDecorator(
-                calendarViewModel.getInfusionSetMarker(userData.infusionSetChangeDate))
-              calendarView.addDecorator(
-                calendarViewModel.getOverlappingMarker( userData.sensorChangeDate,
-                                                        userData.infusionSetChangeDate))
+                calendarViewModel.getInfusionSetMarker())
 
               if(userData.sensorChangeDate === Date())
                 calendarViewModel.saveEventChangeDates(SENSOR_CHANGE)
@@ -172,6 +174,21 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
               etInsulinSupplies.value     = userData.insulinSupplies
               etInfusionSetSupplies.value = userData.infusionSetSupplies
 
+            val sensorDuration = calendarViewModel.calculateSupplyDuration(
+              userData.sensorChangeDate, 14, userData.sensorSupplies)
+
+            binding.tvSensorSupplies.text = getString(  R.string.supplies_remaining,
+                                                        userData.sensorSupplies,
+                                                        SENSOR,
+                                                        sensorDuration )
+
+            val infusionSetDuration = calendarViewModel.calculateSupplyDuration(
+              userData.infusionSetChangeDate, 4, userData.infusionSetSupplies)
+
+            binding.tvInfusionSetSupplies.text = getString( R.string.supplies_remaining,
+                                                            userData.infusionSetSupplies,
+                                                            INFUSION_SETS,
+                                                            infusionSetDuration )
           }
           is NetworkResult.ResultOf.Failure -> {
             hideProgress()
@@ -226,8 +243,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
     calendarView.selectionMode = SELECTION_MODE_SINGLE
     calendarView.selectedDate = CalendarDay.today()
 
-    calendarView.setOnDateChangedListener { widget, date, _ ->
-
+    calendarView.setOnDateChangedListener { _, date, _ ->
 
       if (date == CalendarDay.today()) {
 

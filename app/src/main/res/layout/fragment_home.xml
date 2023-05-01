@@ -19,26 +19,28 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/infusionSetChangeDue"
+        android:id="@+id/infusion_set_change_due"
         android:text="Infusion set change due in 2 days"
-        android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+        android:textColor="@color/quantum_amber900"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_home"
-        android:background="@color/quantum_yellow300"/>
+        android:background="@color/quantum_amber200"/>
 
     <TextView
-        android:id="@+id/sensorChangeDue"
+        android:id="@+id/sensor_change_due"
         android:text="Sensor change due in 5 days"
-        android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/infusionSetChangeDue"
-        android:background="@color/quantum_yellow300"/>
+        app:layout_constraintTop_toBottomOf="@id/infusion_set_change_due"
+        android:textColor="@color/quantum_amber900"
+        android:background="@color/quantum_amber200"/>
 
     <ImageView
         android:id="@+id/logo_image"
@@ -54,12 +56,14 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sensor_change_due"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp">
 
             <WebView
                 android:id="@+id/web_view"
@@ -67,8 +71,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/logo_image"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_home" />
 
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -78,13 +82,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        app:flow_firstVerticalBias="@android:integer/config_longAnimTime"
-        app:layout_constraintLeft_toLeftOf="@id/swipe_container"
-        app:layout_constraintRight_toRightOf="@id/swipe_container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/swipe_container"
-        app:layout_constraintBottom_toBottomOf="@id/logo_image"
-        android:layout_marginTop="120dp"/>
-
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_new_record"

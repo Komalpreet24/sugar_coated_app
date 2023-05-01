@@ -21,6 +21,10 @@ object Constants {
   const val SENSOR_SUPPLIES: String       = "sensorSupplies"
   const val INFUSION_SET_SUPPLIES: String = "infusionSetSupplies"
   const val INSULIN_SUPPLIES: String      = "insulinSupplies"
+  const val MONTHS: String                = "months"
+  const val WEEKS: String                 = "weeks"
+  const val SENSOR: String                = "Sensors"
+  const val INFUSION_SETS: String         = "Infusion Sets"
 
   //TAGS
   const val SIGNUP: String              = "SIGNUP"

@@ -3,6 +3,7 @@ package com.komal.sugarcoated.utils
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.text.style.LineBackgroundSpan
 import android.widget.Toast
@@ -34,6 +35,17 @@ fun isEmailValid(email: String): Boolean{
 fun isPasswordValid(password: String): Boolean{
   return password.matches(PASSWORD_REGEX.toRegex())
 }
+
+val overlappingEventColors = intArrayOf(
+  Color.rgb(165, 39, 20),
+  Color.rgb(0, 96, 100),
+)
+val infusionSetChangeColors = intArrayOf(
+  Color.rgb(0, 96, 100),
+)
+val sensorChangeColors = intArrayOf(
+  Color.rgb(165, 39, 20),
+)
 
 class EventDecorator
   (private val dates: HashSet<CalendarDay>, private val colors: IntArray) : DayViewDecorator {
