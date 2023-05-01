@@ -1,7 +1,6 @@
 package com.komal.sugarcoated.calendar.ui.fragment
 
 import android.app.AlertDialog
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,13 +17,13 @@ import com.komal.sugarcoated.network.NetworkResult
 import com.komal.sugarcoated.signup.model.UserSignUpData
 import com.komal.sugarcoated.utils.*
 import com.komal.sugarcoated.utils.Constants.INFUSION_SET_CHANGE
-import com.komal.sugarcoated.utils.Constants.RESET
 import com.komal.sugarcoated.utils.Constants.SAVE_SUPPLIES_SUCCESS
 import com.komal.sugarcoated.utils.Constants.SENSOR_CHANGE
 import com.mcdev.quantitizerlibrary.AnimationStyle
 import com.mcdev.quantitizerlibrary.HorizontalQuantitizer
 import com.prolificinteractive.materialcalendarview.*
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView.*
+import java.util.*
 
 
 class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarBinding::inflate) {
@@ -64,6 +63,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
   }
 
   private fun setUpDialogs() {
+
     markEventDialogView = LayoutInflater.from(requireContext())
       .inflate(R.layout.log_event_dialog_box, null)
     markEventDialogBuilder = AlertDialog.Builder(requireContext())
@@ -80,11 +80,13 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
     etInfusionSetSupplies = addSuppliesDialogView.findViewById(R.id.et_infusion_set_supplies)
     etInsulinSupplies = addSuppliesDialogView.findViewById(R.id.et_insulin_supplies)
     btnSave = addSuppliesDialogView.findViewById(R.id.btn_save)
+
     val markEventParent = markEventDialogView.parent as? ViewGroup
     markEventParent?.removeView(markEventDialogView)
     markEventDialogBuilder.setTitle("Mark an event")
     markEventDialogBuilder.setView(markEventDialogView)
     markEventDialog = markEventDialogBuilder.create()
+
     val addSuppliesParent = addSuppliesDialogView.parent as? ViewGroup
     addSuppliesParent?.removeView(addSuppliesDialogView)
     addSuppliesDialogBuilder.setView(addSuppliesDialogView)
@@ -161,6 +163,11 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
                 calendarViewModel.getOverlappingMarker( userData.sensorChangeDate,
                                                         userData.infusionSetChangeDate))
 
+              if(userData.sensorChangeDate === Date())
+                calendarViewModel.saveEventChangeDates(SENSOR_CHANGE)
+              if(userData.infusionSetChangeDate === Date())
+                calendarViewModel.saveEventChangeDates(INFUSION_SET_CHANGE)
+
               etSensorSupplies.value      = userData.sensorSupplies
               etInsulinSupplies.value     = userData.insulinSupplies
               etInfusionSetSupplies.value = userData.infusionSetSupplies
@@ -218,7 +225,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
 
     calendarView.selectionMode = SELECTION_MODE_SINGLE
     calendarView.selectedDate = CalendarDay.today()
-    calendarViewModel.saveEventChangeDates(RESET)
 
     calendarView.setOnDateChangedListener { widget, date, _ ->
 
@@ -226,6 +232,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
       if (date == CalendarDay.today()) {
 
         showEventMarkerDialog()
+
         if (calendarViewModel.isInfusionSetChangedToday() == true &&
           calendarViewModel.isSensorChangedToday() == true) {
           sensorChangeDone()
@@ -235,7 +242,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
         }else if (calendarViewModel.isInfusionSetChangedToday() == true) {
           infusionSetChangeDone()
         }
-        widget.selectionColor = Color.TRANSPARENT
 
         btnSensorChange.setOnClickListener{
           calendarViewModel.handleDateSelection(date, SENSOR_CHANGE)
@@ -254,6 +260,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
 
   private fun showEventMarkerDialog(){
     markEventDialog.show()
+    sharedViewModel.getUserData()
   }
 
   private fun showAddSuppliesDialog(){
