@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.komal.sugarcoated.addNewRecord.model.RecordDataModel
 import com.komal.sugarcoated.network.NetworkResult
 import com.komal.sugarcoated.utils.Constants
@@ -33,6 +34,7 @@ class LogBookViewModel(app: Application): AndroidViewModel(app) {
         _auth?.uid?.let { uid ->
           _db?.collection("blood_sugar_records")
             ?.whereEqualTo("userId", uid)
+            ?.orderBy("dateAndTime", Query.Direction.DESCENDING)
             ?.get()
             ?.addOnSuccessListener {documents ->
               val recordList = ArrayList<RecordDataModel>()
