@@ -14,6 +14,7 @@ import com.komal.sugarcoated.utils.Constants.INFUSION_SET_CHANGE
 import com.komal.sugarcoated.utils.Constants.INFUSION_SET_SUPPLIES
 import com.komal.sugarcoated.utils.Constants.INSULIN_SUPPLIES
 import com.komal.sugarcoated.utils.Constants.MONTHS
+import com.komal.sugarcoated.utils.Constants.RESET
 import com.komal.sugarcoated.utils.Constants.SAVE_SUPPLIES
 import com.komal.sugarcoated.utils.Constants.SAVE_SUPPLIES_SUCCESS
 import com.komal.sugarcoated.utils.Constants.SENSOR_CHANGE
@@ -194,6 +195,10 @@ class CalendarViewModel(app: Application): AndroidViewModel(app) {
   fun saveEventChangeDates(eventMarkedToday: String){
       sharedPreferences?.setTodayForSensorChange(eventMarkedToday == SENSOR_CHANGE)
       sharedPreferences?.setTodayForInfusionSetChange(eventMarkedToday == INFUSION_SET_CHANGE)
+    if(eventMarkedToday == RESET){
+      sharedPreferences?.setTodayForSensorChange(false)
+      sharedPreferences?.setTodayForInfusionSetChange(false)
+    }
   }
 
   fun isInfusionSetChangedToday(): Boolean? {

@@ -18,6 +18,7 @@ import com.komal.sugarcoated.signup.model.UserSignUpData
 import com.komal.sugarcoated.utils.*
 import com.komal.sugarcoated.utils.Constants.INFUSION_SETS
 import com.komal.sugarcoated.utils.Constants.INFUSION_SET_CHANGE
+import com.komal.sugarcoated.utils.Constants.RESET
 import com.komal.sugarcoated.utils.Constants.SAVE_SUPPLIES_SUCCESS
 import com.komal.sugarcoated.utils.Constants.SENSOR
 import com.komal.sugarcoated.utils.Constants.SENSOR_CHANGE
@@ -85,7 +86,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
 
     val markEventParent = markEventDialogView.parent as? ViewGroup
     markEventParent?.removeView(markEventDialogView)
-    markEventDialogBuilder.setTitle("Mark an event")
+    markEventDialogBuilder.setTitle(getString(R.string.mark_an_event))
     markEventDialogBuilder.setView(markEventDialogView)
     markEventDialog = markEventDialogBuilder.create()
 
@@ -170,7 +171,10 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
               if(userData.infusionSetChangeDate === Date())
                 calendarViewModel.saveEventChangeDates(INFUSION_SET_CHANGE)
 
-              etSensorSupplies.value      = userData.sensorSupplies
+              if(userData.sensorChangeDate !== Date() && userData.infusionSetChangeDate !== Date())
+                calendarViewModel.saveEventChangeDates(RESET)
+
+            etSensorSupplies.value      = userData.sensorSupplies
               etInsulinSupplies.value     = userData.insulinSupplies
               etInfusionSetSupplies.value = userData.infusionSetSupplies
 
@@ -249,14 +253,15 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
 
         showEventMarkerDialog()
 
-        if (calendarViewModel.isInfusionSetChangedToday() == true &&
-          calendarViewModel.isSensorChangedToday() == true) {
+        if (calendarViewModel.isSensorChangedToday() == true) {
           sensorChangeDone()
+        }
+        if (calendarViewModel.isInfusionSetChangedToday() == true) {
           infusionSetChangeDone()
-        }else if (calendarViewModel.isSensorChangedToday() == true) {
-          sensorChangeDone()
-        }else if (calendarViewModel.isInfusionSetChangedToday() == true) {
-          infusionSetChangeDone()
+        }
+        if (calendarViewModel.isInfusionSetChangedToday() == false &&
+          calendarViewModel.isSensorChangedToday() == false) {
+          resetDialogViews()
         }
 
         btnSensorChange.setOnClickListener{
@@ -298,6 +303,17 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>(FragmentCalendarB
     ivInfusionSet.visibility = VISIBLE
     tvInfusionSetChange.visibility = VISIBLE
     calendarViewModel.saveEventChangeDates(INFUSION_SET_CHANGE)
+  }
+
+  private fun resetDialogViews() {
+    btnInfusionSetChange.visibility = VISIBLE
+    btnInfusionSetChange.isEnabled = true
+    ivInfusionSet.visibility = INVISIBLE
+    tvInfusionSetChange.visibility = INVISIBLE
+    btnSensorChange.visibility  = VISIBLE
+    btnSensorChange.isEnabled   = true
+    ivTickSensor.visibility     = INVISIBLE
+    tvSensorChange.visibility   = INVISIBLE
   }
 
 }

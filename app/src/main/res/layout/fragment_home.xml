@@ -18,30 +18,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/infusion_set_change_due"
-        android:text="Infusion set change due in 2 days"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-        android:textColor="@color/quantum_amber900"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_home"
-        android:background="@color/quantum_amber200"/>
-
-    <TextView
-        android:id="@+id/sensor_change_due"
-        android:text="Sensor change due in 5 days"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/infusion_set_change_due"
-        android:textColor="@color/quantum_amber900"
-        android:background="@color/quantum_amber200"/>
-
     <ImageView
         android:id="@+id/logo_image"
         android:layout_width="match_parent"
@@ -57,25 +33,62 @@
         android:id="@+id/swipe_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sensor_change_due"
+        android:layout_margin="4dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_home"
+        app:layout_constraintBottom_toTopOf="@id/cl_due_date"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <WebView
                 android:id="@+id/web_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_home" />
+                android:layout_height="wrap_content" />
 
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_due_date"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:isScrollContainer="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fillViewport="true"
+        android:background="@drawable/round_corner_drawable">
+
+        <TextView
+            android:id="@+id/tv_sensor_due_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="24dp"
+            android:text="Sensor change due in 2 days"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textColor="@color/quantum_cyan900"/>
+
+        <TextView
+            android:id="@+id/tv_infusion_set_due_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginHorizontal="24dp"
+            android:text="Infusion set change due in 5 days"
+            app:layout_constraintTop_toBottomOf="@id/tv_sensor_due_date"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textColor="@color/quantum_googred900"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
         android:id="@+id/progress_circular"
