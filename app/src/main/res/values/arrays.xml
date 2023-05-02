@@ -1,12 +1,20 @@
 <resources>
-    <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+    <string-array name="color_values">
+        <item>#FFA52714</item>
+        <item>#FF006064</item>
+        <item>#FF3F51B5</item>
+        <item>#FFF57F17</item>
+        <item>#FF880E4F</item>
+        <item>#FF795548</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
+    <string-array name="color_options">
+        <item>@string/red</item>
+        <item>@string/green</item>
+        <item>@string/blue</item>
+        <item>@string/orange</item>
+        <item>@string/pink</item>
+        <item>@string/brown</item>
     </string-array>
+
 </resources>

@@ -94,5 +94,11 @@
     <string
         name="supplies_remaining">"\u2022 %1$d %2$s remaining. Supply will last for %3$s"
     </string>
+    <string name="red">"<font color="#FFA52714">\u2B24 Red</font>"</string>
+    <string name="green">"<font color="#FF006064">\u2B24 Green</font>"</string>
+    <string name="blue">"<font color="#FF3F51B5">\u2B24 Blue</font>"</string>
+    <string name="orange">"<font color="#FFF57F17">\u2B24 Orange</font>"</string>
+    <string name="pink">"<font color="#FF880E4F">\u2B24 Pink</font>"</string>
+    <string name="brown">"<font color="#FF795548">\u2B24 Brown</font>"</string>
 
 </resources>
