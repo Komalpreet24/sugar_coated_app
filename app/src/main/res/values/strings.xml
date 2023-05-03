@@ -36,6 +36,7 @@
     <string name="signup_failed">Sign up failed with %1$s</string>
     <string name="auth_status_check_failed">Auth status check failed with %1$s</string>
     <string name="records_fetching_failed">Failed to fetch records with %1$s</string>
+    <string name="files_fetching_failed">Failed to fetch files with %1$s</string>
     <string name="unknown_error">Unknown Error</string>
     <string name="invalid_date_and_time">Can not select a time in the future</string>
 

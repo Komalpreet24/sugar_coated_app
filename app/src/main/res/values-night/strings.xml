@@ -39,4 +39,5 @@
     <string name="infusion_set_supplies">Infusion Set supplies</string>
     <string name="insulin_supplies">Insulin supplies</string>
     <string name="add_supplies">Add supplies</string>
+  <string name="upload_description">Button to upload files</string>
 </resources>
