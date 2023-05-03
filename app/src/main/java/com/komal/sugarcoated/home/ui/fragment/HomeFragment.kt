@@ -4,41 +4,28 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.komal.sugarcoated.R
 import com.komal.sugarcoated.databinding.FragmentHomeBinding
 import com.komal.sugarcoated.home.ui.vm.HomeViewModel
+import com.komal.sugarcoated.utils.BaseFragment
 import com.komal.sugarcoated.utils.Constants.FIVE_MINUTES
 import com.komal.sugarcoated.utils.Constants.ONE_SECOND
 import com.komal.sugarcoated.utils.findLocationOfCenterOnTheScreen
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-    private lateinit var binding: FragmentHomeBinding
     private val homeViewModel by viewModels<HomeViewModel>()
     private lateinit var webView: WebView
     private var url: String? = null
     private var isWebViewReloading = false
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        binding = FragmentHomeBinding.inflate(layoutInflater)
-        return binding.root
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

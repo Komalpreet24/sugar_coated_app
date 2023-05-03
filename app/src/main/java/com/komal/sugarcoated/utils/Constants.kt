@@ -34,6 +34,7 @@ object Constants {
   const val EVENT_LOG: String           = "EVENT_LOG"
   const val USER_DATA: String           = "USER_DATA"
   const val SAVE_SUPPLIES: String       = "SAVE_SUPPLIES"
+  const val UPLOAD_FILE: String         = "UPLOAD_FILE"
 
   //SUCCESS CONSTANTS
   const val SIGNUP_SUCCESS: String        = "SIGNUP_SUCCESS"
@@ -42,5 +43,6 @@ object Constants {
   const val RESET: String                 = "RESET"
   const val SAVE_RECORD_SUCCESS: String   = "SAVE_RECORD_SUCCESS"
   const val SAVE_SUPPLIES_SUCCESS: String = "SAVE_SUPPLIES_SUCCESS"
+  const val UPLOAD_FILE_SUCCESS: String   = "UPLOAD_FILE_SUCCESS"
 
 }

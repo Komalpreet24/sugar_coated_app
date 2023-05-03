@@ -80,5 +80,6 @@ dependencies {
         exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib"
     }
 
+    implementation 'com.google.firebase:firebase-storage:20.1.0'
 
 }

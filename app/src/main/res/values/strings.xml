@@ -30,6 +30,7 @@
     <string name="fetch_today_event">Fetch today\'s event failed with %1$s</string>
     <string name="fetch_supplies_failed">Fetch supplies failed with %1$s</string>
     <string name="new_record_addition_failed">New record addition failed with %1$s</string>
+    <string name="file_upload_failed">File upload failed with %1$s</string>
     <string name="save_supplies_saves">Saving supplies failed with %1$s</string>
     <string name="logout_failed">Logout failed with %1$s</string>
     <string name="signup_failed">Sign up failed with %1$s</string>
@@ -44,6 +45,7 @@
     <string name="signup_successful">Registration Successful, Please login.</string>
     <string name="new_record_added">New Record Added Successfully</string>
     <string name="save_supplies">Supplies Saved Successfully</string>
+    <string name="file_upload_successful">File Uploaded Successfully</string>
 
     <!--UI Strings-->
     <string name="login">Login</string>
@@ -100,5 +102,6 @@
     <string name="orange">"<font color="#FFF57F17">\u2B24 Orange</font>"</string>
     <string name="pink">"<font color="#FF880E4F">\u2B24 Pink</font>"</string>
     <string name="brown">"<font color="#FF795548">\u2B24 Brown</font>"</string>
+    <string name="upload_description">Button to upload files</string>
 
 </resources>
