@@ -1,5 +1,5 @@
-# Blood Glucose Tracking App
-This is an Android application built using Kotlin, Firebase for authentication, and Firebase Firestore for database management.
+# Sugar Coated
+This is an Android application built using Kotlin, Firebase for authentication, and Firebase Firestore and Firebase Storage for database management.
 The app is to assist diabteics with the goal of future expansion for pubic use. The main objective of creating this application was to allow family and friends to monitor blood glucose levels and track supplies. Features include recording manual entries of blood sugar level throughout the day, calendar  to track and view events related to diabetes management.
 
 ## Features
@@ -50,6 +50,15 @@ The app is to assist diabteics with the goal of future expansion for pubic use. 
   <img src="https://user-images.githubusercontent.com/60284996/235790826-a9b5bc49-6e60-411d-81b5-0c3f2084aea9.jpg" width="250">
 </p>
 
+- **Files Page**:
+  - This feature allows users to upload and download files to and from Firebase Storage. The purpose of this feature is to allow users to store all their important documents, such as receipts, prescriptions, bills, and lab test reports in one place for ease of access.
+  - The user can upload the file using the upload button on this page, and download/ view the file by simply clicking on the file.
+<br>
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/60284996/236046259-ed385ce5-39e4-4919-8b2a-b5ad8f2fc36b.jpg" width="250">
+</p>
+
+
 - **Settings Page**: 
   - This page allows users to customise the colors for calendar events and set the target range for manual entries.The weblink for tracking user's blood glucose value should also be added here,
 <br>
@@ -58,12 +67,13 @@ The app is to assist diabteics with the goal of future expansion for pubic use. 
   <img src="https://user-images.githubusercontent.com/60284996/235794492-9f9e1ef6-2fa6-4767-b241-e17dd9158ca9.jpg" width="250">
 </p>
   
-  
 ## Tech Stack
 - Kotlin
 - MVVM Architecture
 - Firebase (Authentication)
 - Firestore (Database Management)
+- Firebase storage (File Storage)
+
 ## Installation
 - Clone the repository: `git clone https://github.com/Komalpreet24/sugar_coated_app.git`
 - Open the project in Android Studio
